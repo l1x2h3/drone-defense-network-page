@@ -1,5 +1,12 @@
 # just-the-docs-template
 
+本地测试办法：
+```
+bundle install
+bundle exec jekyll serve
+```
+
+
 This is a *bare-minimum* template to create a [Jekyll] site that:
 
 - uses the [Just the Docs] theme;

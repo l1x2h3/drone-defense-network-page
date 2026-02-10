@@ -10,4 +10,4 @@ baseurl: /drone-defense-network-page   # ← 替换为你的仓库名！
 # 可选：右上角链接
 aux_links:
   "GitHub 仓库":
-    - "https://github.com/l1x2h3/drone-defense-network-page"
+    - "https://github.com/l1x2h3/drone-defense-network"
