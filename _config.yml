@@ -1,8 +1,13 @@
-title: Just the Docs Template
-description: A starter template for a Jeykll site using the Just the Docs theme!
+# _config.yml
+title: 我的无人机防御网络
+description: 项目文档与说明
 theme: just-the-docs
 
-url: https://just-the-docs.github.io
+# 关键！设置正确的 URL 和 baseurl
+url: https://l1x2h3.github.io
+baseurl: /drone-defense-network-page   # ← 替换为你的仓库名！
 
+# 可选：右上角链接
 aux_links:
-  Template Repository: https://github.com/just-the-docs/just-the-docs-template
+  "GitHub 仓库":
+    - "https://github.com/l1x2h3/drone-defense-network-page"
