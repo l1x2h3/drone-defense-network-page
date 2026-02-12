@@ -25,6 +25,129 @@ description: 基于SDR与AI的智能无人机防御平台
     border-radius: 4px;
     margin: 1rem 0;
   }
+  .tech-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .7rem;
+    align-items: center;
+    margin: 1rem 0 1.4rem;
+  }
+  .flow-node {
+    padding: .55rem .85rem;
+    font-weight: 600;
+    color: #0b3d91;
+    background: #eef4ff;
+    border: 1px solid #b8d0ff;
+    text-align: center;
+    min-width: 90px;
+  }
+  .shape-rect { border-radius: 6px; }
+  .shape-round { border-radius: 999px; }
+  .shape-diamond {
+    width: 84px;
+    height: 84px;
+    min-width: unset;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg);
+    border-radius: 8px;
+  }
+  .shape-diamond span { transform: rotate(-45deg); display: inline-block; }
+  .shape-parallelogram {
+    transform: skewX(-15deg);
+    border-radius: 4px;
+  }
+  .shape-parallelogram span { display: inline-block; transform: skewX(15deg); }
+  .flow-arrow {
+    color: #6b7280;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .principle-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: .9rem;
+    margin-top: .8rem;
+  }
+  .principle-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: .85rem .9rem;
+    background: #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+  }
+  .principle-card h4 {
+    margin: 0 0 .45rem;
+    font-size: 1rem;
+  }
+  .principle-card p {
+    margin: .25rem 0;
+    font-size: .92rem;
+    line-height: 1.5;
+  }
+  .layer-stack {
+    max-width: 860px;
+    margin: 1rem auto 1.4rem;
+    border: 1px solid #d9e2f2;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #ffffff;
+  }
+  .layer-row {
+    padding: .75rem 1rem;
+    text-align: center;
+    font-weight: 600;
+    border-top: 1px solid #e8edf7;
+    background: linear-gradient(180deg, #f9fbff 0%, #f2f6ff 100%);
+  }
+  .layer-row:first-child {
+    border-top: 0;
+  }
+  .layer-row em {
+    font-style: normal;
+    font-weight: 500;
+    color: #4b5563;
+    margin-left: .3rem;
+  }
+  .flow-board {
+    max-width: 980px;
+    margin: 1rem auto 1.4rem;
+    display: grid;
+    gap: .55rem;
+  }
+  .flow-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .45rem;
+  }
+  .flow-box {
+    background: #ffffff;
+    border: 1px solid #dbe4f3;
+    border-radius: 8px;
+    padding: .45rem .7rem;
+    font-size: .92rem;
+    font-weight: 600;
+    color: #1f2937;
+  }
+  .flow-box.core {
+    background: #edf4ff;
+    border-color: #bfd4ff;
+    color: #0b3d91;
+  }
+  .flow-connector {
+    color: #64748b;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0 .1rem;
+  }
+  .flow-line.offset-left {
+    margin-left: 1.8rem;
+  }
+  .flow-line.offset-right {
+    margin-left: 9.2rem;
+  }
 </style>
 
 
@@ -83,68 +206,77 @@ description: 基于SDR与AI的智能无人机防御平台
 
 ## ⚙️ 技术原理
 
-### 2.1 信号感知与预处理
+<div class="highlight-box" style="background:#f3f8ff;">
+  <strong>形状化流程总览</strong><br>
+  用不同图形表达职责：矩形=处理模块，圆角矩形=智能识别，菱形=决策判断，平行四边形=执行输出。
+</div>
 
-**多通道 IQ 采样**：采用 HackRF/PlutoSDR 异构节点，最高采样率 20 MSPS，16-bit 正交采样。通过 GPS 授时模块实现多节点微秒级时间同步（PPS 精度 ±50 ns）。  
-**时频分析**：对 IQ 数据流实时滑动窗口进行短时傅里叶变换（STFT，窗长 1024，重叠 75%），生成时频谱图；同时引入 Wigner-Ville 分布提升非平稳信号的分辨率。  
-**弱信号检测**：多阈值恒虚警率（CFAR）算法自适应估计噪声基底，最小可检测信号强度 ≤ -100 dBm，虚警率 ≤ 1%。  
+<div class="tech-flow">
+  <div class="flow-node shape-rect">2.1 感知</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-node shape-round">2.2 指纹特征</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-node shape-round">2.3 智能分类</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-node shape-rect">2.4 定位跟踪</div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-node shape-diamond"><span>2.5 对抗决策</span></div>
+  <div class="flow-arrow">→</div>
+  <div class="flow-node shape-parallelogram"><span>2.6 反馈闭环</span></div>
+</div>
 
-### 2.2 特征提取与射频指纹
-
-**小波包分解**：对 IQ 信号进行 5 层小波包分解，提取各子带能量、熵及方差，构成 64 维特征向量，有效刻画瞬态开/关机特征。  
-**MFCC 特征**：将 IQ 信号转换为功率谱，提取 13 阶梅尔频率倒谱系数（MFCC）及其一阶差分，表征信号调制风格。  
-**循环平稳特征**：计算信号的循环谱截面，利用循环频率域差异区分同频段不同协议（如 DJI OcuSync vs. WiFi）。  
-**在线增量学习**：新捕获信号经人工标注后，通过增量 SVM 更新指纹库，模型适应新机型时间 ≤ 2 s。  
-
-### 2.3 智能识别与分类
-
-**CNN+SVM 混合模型**：预处理后的时频图输入轻量化 CNN（3 卷积层 + 2 全连接层），提取深度特征；顶层采用线性 SVM 替代 Softmax，小样本条件下泛化能力提升 15%。  
-**注意力机制**：在卷积层后插入通道-空间混合注意力模块，自动聚焦信号突发特征区域，对低信噪比信号识别率提高 22%。  
-**迁移学习**：预训练模型在大规模公开数据集（RadioML 2018.01A）上收敛，针对特定无人机协议微调（冻结前 2 层），仅需 50 个样本即可达到 85% 准确率。  
-
-### 2.4 高精度定位与跟踪
-
-**TDOA 解算**：多站信号互相关估计到达时间差，Chan 算法与 Taylor 级数迭代联合求解目标位置，Cramér-Rao 下界逼近理论最优。  
-**AOA 估计**：采用 MUSIC 算法对均匀线性阵列（ULA）进行超分辨测向，角度分辨率 ≤ 3°。  
-**融合滤波**：扩展卡尔曼滤波（EKF）将 TDOA 伪距与 AOA 方位角进行紧耦合，同时估计位置与速度；引入交互多模型（IMM）应对无人机变速、转弯等机动。  
-**轨迹预测**：基于当前运动状态与历史轨迹，使用卡尔曼平滑算法预测未来 3 s 位置，提前引导天线指向。  
-
-### 2.5 自适应干扰对抗
-
-**数字波束成形（DBF）**：4 阵元相控阵天线，通过最小方差无失真响应（MVDR）准则计算最优权矢量，主瓣指向目标方向，零陷对准同频干扰源。  
-**DQN 动态干扰策略优化**：将干扰过程建模为马尔可夫决策过程（MDP），状态包括目标信号强度、信噪比、误码率；动作空间含 3 种干扰模式（宽带噪声、协议欺骗、扫频）及功率档位；奖励函数基于干扰后目标失联概率。离线训练后在线推理时间 < 5 ms。  
-**协议级欺骗**：  
-- **WiFi Deauth**：Scapy 构造 802.11 管理帧，以目标 MAC 地址连续发送去认证帧，使客户端强制断连。  
-- **GPS 欺骗**：基于 gps-sdr-sim 生成伪造 C/A 码，GFSK 调制至 1575.42 MHz，同时模拟 5 颗卫星信号，实现厘米级位置诱导。  
-- **MAVLink 注入**：解析无人机遥测下行链路，注入 PARAM_REQUEST_LIST、MISSION_ITEM 等恶意指令，触发飞控异常。  
-
-### 2.6 效能评估与闭环反馈
-
-**干扰后验证**：发射干扰信号后立即切换至接收模式，检测目标信号是否消失/失真；同时调用视觉模块确认目标是否偏离航线/迫降。  
-**自适应退避**：若干扰无效，根据历史经验调整干扰参数（提高功率 3 dB、切换频点），避免无效发射。  
-**日志分析**：所有干扰事件（时间、频点、功率、结果）存入数据库，用于事后分析及策略离线优化。  
+<div class="principle-grid">
+  <div class="principle-card">
+    <h4>▭ 2.1 信号感知与预处理</h4>
+    <p>多节点 SDR 并行采样，GPS/PPS 同步。</p>
+    <p>STFT + CFAR 完成时频分析与弱信号检测。</p>
+  </div>
+  <div class="principle-card">
+    <h4>◉ 2.2 特征提取与射频指纹</h4>
+    <p>小波包、MFCC、循环平稳特征联合建模。</p>
+    <p>支持增量学习，快速适配新机型协议。</p>
+  </div>
+  <div class="principle-card">
+    <h4>◉ 2.3 智能识别与分类</h4>
+    <p>CNN 提取深度特征，SVM 提升小样本泛化。</p>
+    <p>注意力 + 迁移学习，提高低信噪比识别率。</p>
+  </div>
+  <div class="principle-card">
+    <h4>▭ 2.4 高精度定位与跟踪</h4>
+    <p>TDOA 与 AOA 融合解算三维位置。</p>
+    <p>EKF/IMM 持续跟踪并预测短时轨迹。</p>
+  </div>
+  <div class="principle-card">
+    <h4>◇ 2.5 自适应干扰对抗</h4>
+    <p>DQN 根据实时状态选择干扰策略。</p>
+    <p>支持噪声压制、协议欺骗与链路阻断。</p>
+  </div>
+  <div class="principle-card">
+    <h4>▱ 2.6 效能评估与闭环反馈</h4>
+    <p>干扰后立即复测，判断是否失联/偏航。</p>
+    <p>自动退避调参并沉淀日志用于策略迭代。</p>
+  </div>
+</div>
 
 ---
-
 ## 🏗️ 系统架构
 
 ### 3.1 总体架构分层
 
-系统采用六层纵深防御架构，各层间通过标准化接口解耦，支持横向扩展与组件热插拔。
+系统采用五层纵深防御架构，各层间通过标准化接口解耦，支持横向扩展与组件热插拔。
 
-```
-┌─────────────────────────────────────────────────────┐
-│                   扩展层（REST/gRPC/SDK）           │
-├─────────────────────────────────────────────────────┤
-│                   决策层（规则引擎/RL）             │
-├─────────────────────────────────────────────────────┤
-│                   处理层（GUI/存储/加速）           │
-├─────────────────────────────────────────────────────┤
-│                   传输层（ZeroMQ/SSH）              │
-├─────────────────────────────────────────────────────┤
-│                   感知层（SDR/视觉/雷达）           │
-└─────────────────────────────────────────────────────┘
-```
+<div class="layer-stack">
+  <div class="layer-row">扩展层 <em>REST / gRPC / SDK</em></div>
+  <div class="layer-row">决策层 <em>规则引擎 / RL</em></div>
+  <div class="layer-row">处理层 <em>GUI / 存储 / 加速</em></div>
+  <div class="layer-row">传输层 <em>ZeroMQ / SSH</em></div>
+  <div class="layer-row">感知层 <em>SDR / 视觉 / 雷达</em></div>
+</div>
+
+<p align="center">
+  <img src="{{ '/图片1.png' | relative_url }}" alt="系统整体架构图" width="920">
+</p>
+<p align="center">图：系统整体架构</p>
 
 ### 3.2 感知层
 
@@ -198,15 +330,44 @@ description: 基于SDR与AI的智能无人机防御平台
 
 ### 3.7 数据流说明
 
-```
-[SDR节点] → IQ数据 → [传输层(ZeroMQ)] → [处理层]  
-              ↓                                    ↓
-         [特征提取] → [识别模型] → [定位解算] → [决策层]  
-                                                   ↓
-         [干扰策略] → [发射指令] → [HackRF] → [目标]  
-              ↑                                    ↓
-         [效能评估] ← [视觉反馈] ← [摄像头] ← [状态变化]
-```
+<div class="flow-board">
+  <div class="flow-line">
+    <div class="flow-box core">SDR 节点</div>
+    <div class="flow-connector">→</div>
+    <div class="flow-box">IQ 数据</div>
+    <div class="flow-connector">→</div>
+    <div class="flow-box core">传输层（ZeroMQ）</div>
+    <div class="flow-connector">→</div>
+    <div class="flow-box core">处理层</div>
+  </div>
+  <div class="flow-line offset-left">
+    <div class="flow-box">特征提取</div>
+    <div class="flow-connector">→</div>
+    <div class="flow-box">识别模型</div>
+    <div class="flow-connector">→</div>
+    <div class="flow-box">定位解算</div>
+    <div class="flow-connector">→</div>
+    <div class="flow-box core">决策层</div>
+  </div>
+  <div class="flow-line offset-right">
+    <div class="flow-box core">干扰策略</div>
+    <div class="flow-connector">→</div>
+    <div class="flow-box">发射指令</div>
+    <div class="flow-connector">→</div>
+    <div class="flow-box core">HackRF</div>
+    <div class="flow-connector">→</div>
+    <div class="flow-box">目标</div>
+  </div>
+  <div class="flow-line offset-left">
+    <div class="flow-box">效能评估</div>
+    <div class="flow-connector">←</div>
+    <div class="flow-box">视觉反馈</div>
+    <div class="flow-connector">←</div>
+    <div class="flow-box">摄像头</div>
+    <div class="flow-connector">←</div>
+    <div class="flow-box">状态变化</div>
+  </div>
+</div>
 
 ---
 
@@ -288,4 +449,3 @@ description: 基于SDR与AI的智能无人机防御平台
 ---
 
 *文档版本：1.0 · 最后更新：2026 年 2 月*
-
