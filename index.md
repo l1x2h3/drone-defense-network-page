@@ -6,12 +6,53 @@ description: 基于SDR与AI的智能无人机防御平台
 ---
 
 <style>
+  :root {
+    --font-body: "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    --font-heading: "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  }
+  body,
+  .main-content,
+  .site-title,
+  .site-nav,
+  .search-input {
+    font-family: var(--font-body) !important;
+  }
+  h1, h2, h3, h4, h5, h6,
+  .site-title,
+  .nav-list .nav-list-item > .nav-list-link {
+    font-family: var(--font-heading) !important;
+    letter-spacing: .01em;
+  }
   .feature-card {
     background: #f8f9fa;
     border-left: 4px solid #0d6efd;
     padding: 1.2rem;
     margin: 1.5rem 0;
     border-radius: 0 4px 4px 0;
+  }
+  .feature-group-title {
+    margin: 1.2rem 0 .6rem;
+    font-weight: 700;
+    color: #0b3d91;
+    border-left: 4px solid #60a5fa;
+    padding-left: .55rem;
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: .75rem;
+  }
+  .feature-grid .feature-card {
+    margin: 0;
+    border-left-width: 3px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .76);
+    border: 1px solid rgba(148, 163, 184, .28);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, .05);
+  }
+  .feature-grid .feature-card strong {
+    display: inline-block;
+    margin-bottom: .2rem;
   }
   .section-header {
     border-bottom: 1px solid #eaecef;
@@ -71,12 +112,21 @@ description: 基于SDR与AI的智能无人机防御平台
     margin-top: .8rem;
   }
   .principle-card {
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
+    border: 1px solid rgba(148, 163, 184, .36);
+    border-radius: 12px;
     padding: .85rem .9rem;
-    background: #ffffff;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, .04);
+    background:
+      radial-gradient(120% 120% at 0% 0%, rgba(255,255,255,.62), transparent 55%),
+      rgba(255,255,255,.78);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, .06);
   }
+  .principle-card:nth-child(1),
+  .principle-card:nth-child(4) { background-color: rgba(219, 234, 254, .5); border-color: rgba(96, 165, 250, .45); }
+  .principle-card:nth-child(2),
+  .principle-card:nth-child(3) { background-color: rgba(209, 250, 229, .45); border-color: rgba(16, 185, 129, .38); }
+  .principle-card:nth-child(5),
+  .principle-card:nth-child(6) { background-color: rgba(254, 243, 199, .5); border-color: rgba(245, 158, 11, .42); }
   .principle-card h4 {
     margin: 0 0 .45rem;
     font-size: 1rem;
@@ -89,21 +139,31 @@ description: 基于SDR与AI的智能无人机防御平台
   .layer-stack {
     max-width: 860px;
     margin: 1rem auto 1.4rem;
-    border: 1px solid #d9e2f2;
-    border-radius: 10px;
+    border: 1px solid rgba(148, 163, 184, .35);
+    border-radius: 14px;
     overflow: hidden;
-    background: #ffffff;
+    background:
+      radial-gradient(120% 100% at 10% 0%, rgba(56, 189, 248, .14), transparent 55%),
+      radial-gradient(120% 100% at 100% 100%, rgba(96, 165, 250, .18), transparent 50%),
+      rgba(255, 255, 255, .78);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 14px 30px rgba(15, 23, 42, .08);
   }
   .layer-row {
     padding: .75rem 1rem;
     text-align: center;
     font-weight: 600;
-    border-top: 1px solid #e8edf7;
-    background: linear-gradient(180deg, #f9fbff 0%, #f2f6ff 100%);
+    border-top: 1px solid rgba(203, 213, 225, .42);
+    background: linear-gradient(180deg, rgba(255,255,255,.82) 0%, rgba(248,250,252,.68) 100%);
   }
   .layer-row:first-child {
     border-top: 0;
   }
+  .layer-row:nth-child(1) { background: linear-gradient(180deg, rgba(219, 234, 254, .72), rgba(191, 219, 254, .35)); }
+  .layer-row:nth-child(2) { background: linear-gradient(180deg, rgba(224, 242, 254, .72), rgba(186, 230, 253, .35)); }
+  .layer-row:nth-child(3) { background: linear-gradient(180deg, rgba(236, 253, 245, .72), rgba(167, 243, 208, .34)); }
+  .layer-row:nth-child(4) { background: linear-gradient(180deg, rgba(254, 249, 195, .72), rgba(253, 224, 71, .3)); }
+  .layer-row:nth-child(5) { background: linear-gradient(180deg, rgba(254, 226, 226, .72), rgba(252, 165, 165, .3)); }
   .layer-row em {
     font-style: normal;
     font-weight: 500;
@@ -123,21 +183,26 @@ description: 基于SDR与AI的智能无人机防御平台
     gap: .45rem;
   }
   .flow-box {
-    background: #ffffff;
-    border: 1px solid #dbe4f3;
-    border-radius: 8px;
+    background: rgba(255, 255, 255, .78);
+    border: 1px solid rgba(148, 163, 184, .34);
+    border-radius: 10px;
     padding: .45rem .7rem;
     font-size: .92rem;
     font-weight: 600;
     color: #1f2937;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, .06);
   }
   .flow-box.core {
-    background: #edf4ff;
-    border-color: #bfd4ff;
+    background: linear-gradient(180deg, rgba(191, 219, 254, .72), rgba(147, 197, 253, .45));
+    border-color: rgba(96, 165, 250, .52);
     color: #0b3d91;
   }
+  .flow-line:nth-child(2) .flow-box { background: linear-gradient(180deg, rgba(220, 252, 231, .72), rgba(187, 247, 208, .42)); border-color: rgba(74, 222, 128, .4); }
+  .flow-line:nth-child(3) .flow-box { background: linear-gradient(180deg, rgba(254, 240, 138, .72), rgba(253, 224, 71, .34)); border-color: rgba(250, 204, 21, .45); }
+  .flow-line:nth-child(4) .flow-box { background: linear-gradient(180deg, rgba(254, 226, 226, .72), rgba(252, 165, 165, .34)); border-color: rgba(248, 113, 113, .42); }
   .flow-connector {
-    color: #64748b;
+    color: rgba(71, 85, 105, .85);
     font-weight: 700;
     line-height: 1;
     padding: 0 .1rem;
@@ -148,9 +213,221 @@ description: 基于SDR与AI的智能无人机防御平台
   .flow-line.offset-right {
     margin-left: 9.2rem;
   }
+  .arch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: .8rem;
+    margin: .8rem 0 1.4rem;
+  }
+  .arch-card {
+    background:
+      radial-gradient(120% 120% at 0% 0%, rgba(255,255,255,.55), transparent 50%),
+      rgba(255, 255, 255, .74);
+    border: 1px solid rgba(148, 163, 184, .35);
+    border-radius: 12px;
+    padding: .8rem .9rem;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, .06);
+  }
+  .arch-card:nth-child(3n+1) { border-color: rgba(59, 130, 246, .45); background-color: rgba(219, 234, 254, .45); }
+  .arch-card:nth-child(3n+2) { border-color: rgba(16, 185, 129, .4); background-color: rgba(209, 250, 229, .42); }
+  .arch-card:nth-child(3n) { border-color: rgba(245, 158, 11, .45); background-color: rgba(254, 243, 199, .45); }
+  .arch-card h4 {
+    margin: 0 0 .45rem;
+    font-size: 1rem;
+    color: #0b3d91;
+  }
+  .arch-card p {
+    margin: .2rem 0;
+    font-size: .92rem;
+    line-height: 1.5;
+  }
+  .arch-top-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: .8rem 0 1rem;
+    padding: .7rem;
+    border: 1px solid rgba(148, 163, 184, .35);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .7);
+    backdrop-filter: blur(4px);
+  }
+  .arch-top-nav a {
+    text-decoration: none;
+    color: #0b3d91;
+    font-weight: 600;
+    font-size: .9rem;
+    padding: .35rem .6rem;
+    border: 1px solid rgba(96, 165, 250, .35);
+    border-radius: 999px;
+    background: rgba(239, 246, 255, .85);
+  }
+  .arch-shell {
+    display: block;
+  }
+  .arch-sidebar {
+    position: static;
+    border: 1px solid rgba(148, 163, 184, .35);
+    border-radius: 12px;
+    padding: .7rem;
+    background: rgba(255, 255, 255, .72);
+    backdrop-filter: blur(4px);
+    margin: 0 0 1rem;
+  }
+  .arch-sidebar h4 {
+    margin: 0 0 .45rem;
+    font-size: .95rem;
+    color: #0b3d91;
+  }
+  .arch-sidebar-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: .2rem .4rem;
+  }
+  .arch-sidebar a {
+    display: block;
+    text-decoration: none;
+    color: #334155;
+    padding: .3rem .35rem;
+    border-radius: 6px;
+    font-size: .9rem;
+  }
+  .arch-sidebar a:hover {
+    background: rgba(219, 234, 254, .8);
+    color: #0b3d91;
+  }
+  .arch-main {
+    min-width: 0;
+  }
+  @media (max-width: 900px) {
+    .arch-sidebar {
+      position: static;
+    }
+    .arch-sidebar-links {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (min-width: 50rem) {
+    .side-bar {
+      width: 220px;
+      min-width: 220px;
+    }
+    .site-header {
+      max-width: 220px;
+    }
+    .site-nav,
+    .site-footer {
+      width: 220px;
+    }
+    .main {
+      margin-left: 220px;
+      max-width: none;
+    }
+    .main-header,
+    .main-content-wrap {
+      max-width: none !important;
+    }
+    .main-content-wrap {
+      max-width: none !important;
+      display: block !important;
+    }
+    .main-content {
+      max-width: none !important;
+      width: auto !important;
+      margin: 0 !important;
+      padding-left: 1rem !important;
+      padding-right: 1.2rem !important;
+    }
+  }
+  .page-toc-floating {
+    position: fixed;
+    left: 236px;
+    top: 96px;
+    width: 220px;
+    max-height: calc(100vh - 120px);
+    overflow: auto;
+    z-index: 8;
+    border: 1px solid rgba(148, 163, 184, .35);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .86);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, .08);
+    padding: .65rem;
+  }
+  .page-toc-floating h4 {
+    margin: 0 0 .45rem;
+    font-size: .92rem;
+    color: #0b3d91;
+  }
+  .page-toc-floating a {
+    display: block;
+    text-decoration: none;
+    color: #334155;
+    padding: .26rem .35rem;
+    border-radius: 6px;
+    font-size: .86rem;
+  }
+  .page-toc-floating a.sub {
+    padding-left: .95rem;
+    color: #475569;
+    font-size: .82rem;
+  }
+  .page-toc-floating a:hover {
+    background: rgba(219, 234, 254, .8);
+    color: #0b3d91;
+  }
+  .table-wrapper table,
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .table-wrapper table th,
+  .table-wrapper table td,
+  table th,
+  table td {
+    text-align: center !important;
+    vertical-align: middle;
+  }
+  .table-wrapper table tbody tr:nth-child(odd) > td,
+  table tbody tr:nth-child(odd) > td {
+    background: rgba(239, 246, 255, .58) !important;
+  }
+  .table-wrapper table tbody tr:nth-child(even) > td,
+  table tbody tr:nth-child(even) > td {
+    background: rgba(241, 245, 249, .72) !important;
+  }
+  .table-wrapper table thead tr,
+  table thead tr {
+    background: rgba(219, 234, 254, .86) !important;
+  }
+  @media (max-width: 1400px) {
+    .page-toc-floating {
+      display: none;
+    }
+  }
 </style>
 
 
+<div class="page-toc-floating">
+  <h4>全文目录</h4>
+  <a href="#sec-overview">系统概述</a>
+  <a href="#sec-core">核心功能</a>
+  <a href="#sec-tech">技术原理</a>
+  <a href="#sec-arch">系统架构</a>
+  <a class="sub" href="#arch-31">3.1 总体架构分层</a>
+  <a class="sub" href="#arch-32">3.2 感知层</a>
+  <a class="sub" href="#arch-33">3.3 传输层</a>
+  <a class="sub" href="#arch-34">3.4 处理层</a>
+  <a class="sub" href="#arch-35">3.5 决策层</a>
+  <a class="sub" href="#arch-36">3.6 扩展层</a>
+  <a class="sub" href="#arch-37">3.7 数据流说明</a>
+  <a href="#sec-metrics">性能指标</a>
+  <a href="#sec-stack">软件与硬件</a>
+  <a href="#sec-meta">版本与信息</a>
+</div>
+
+<div id="sec-overview"></div>
 # 无人机防御网络系统  
 **基于SDR与AI的智能电磁感知与精准反制平台**  
 
@@ -160,50 +437,48 @@ description: 基于SDR与AI的智能无人机防御平台
 
 ---
 
+<div id="sec-core"></div>
 ## 🔧 核心功能
 
-<div class="feature-card">
-  <strong>📡 全频段频谱侦测</strong><br>
-  覆盖 20 MHz – 6 GHz，兼容 DJI OcuSync、Autel、Parrot、Skydio、WiFi 2.4/5.8 GHz、蓝牙、4G/5G 及 MAVLink 等主流协议。支持瞬态信号捕获与跳频模式识别，毫秒级频谱刷新。
+<div class="feature-group-title">A. 侦测与识别（先发现、再认清）</div>
+<div class="feature-grid">
+  <div class="feature-card">
+    <strong>📡 全频段频谱侦测</strong><br>
+    20 MHz – 6 GHz 覆盖，多协议兼容，毫秒级频谱刷新与跳频识别。
+  </div>
+  <div class="feature-card">
+    <strong>🧠 多模态智能识别</strong><br>
+    RF 指纹 + 时频特征 + CNN/SVM，支持 30+ 机型实时分类，新协议识别准确率 ≥92%。
+  </div>
 </div>
 
-<div class="feature-card">
-  <strong>🧠 多模态信号智能识别</strong><br>
-  融合射频指纹（RF Fingerprinting）、小波包分解、MFCC 及循环平稳特征，通过 CNN+SVM 混合模型实现 30+ 种无人机型号的实时分类，小样本迁移学习使新协议识别准确率 ≥92%。
+<div class="feature-group-title">B. 定位与反制（先锁定、再处置）</div>
+<div class="feature-grid">
+  <div class="feature-card">
+    <strong>📍 融合定位与跟踪</strong><br>
+    TDOA+AOA 融合定位，误差 ≤3 m；卡尔曼轨迹预测支持动态连续跟踪。
+  </div>
+  <div class="feature-card">
+    <strong>⚡ 自适应干扰对抗</strong><br>
+    DQN 动态调参，支持噪声压制、协议级欺骗与链路阻断，策略毫秒级切换。
+  </div>
 </div>
 
-<div class="feature-card">
-  <strong>📍 TDOA+AOA 融合定位</strong><br>
-  分布式 SDR 传感器节点通过 GPS 纳秒级同步，联合到达时间差（TDOA）与到达角度（AOA）算法，实现亚米级三维定位（误差 ≤3 m）。卡尔曼滤波轨迹预测，支持动态目标连续跟踪。
-</div>
-
-<div class="feature-card">
-  <strong>⚡ 自适应智能干扰</strong><br>
-  基于深度 Q 网络（DQN）动态优化干扰频率、带宽、功率与波束指向，支持宽带噪声压制、协议级欺骗（Deauth、GPS Spoofing）及图传链路阻断。干扰策略毫秒级切换，附带干扰效能自动评估。
-</div>
-
-<div class="feature-card">
-  <strong>📹 计算机视觉辅助识别</strong><br>
-  集成 YOLOv8 目标检测模型，GPU 加速推理（≥30 FPS），实时识别无人机类型并叠加检测框。视觉结果与雷达/频谱数据多模态融合，误报率降低 65%。
-</div>
-
-<div class="feature-card">
-  <strong>🌐 远程设备管理与态势可视化</strong><br>
-  基于阿里云 01-KICKPI-K2B 远程控制框架，实现 HackRF 等 SDR 设备的 SSH 远程操控，API 100% 兼容本地 pyhackrf。可视化界面包含电子地图、频谱热力图、设备拓扑及威胁轨迹回放，支持多屏联动。
-</div>
-
-<div class="feature-card">
-  <strong>💥 多协议协同攻击平台</strong><br>
-  一体化集成 WiFi 2.4/5.8 GHz 噪声干扰、GNSS 高精度欺骗、MAVLink 协议 DoS 攻击及信号重放，干扰成功率 ≥95%，系统成本仅为传统方案的 10%。
-</div>
-
-<div class="feature-card">
-  <strong>🗄️ 双引擎数据仓库</strong><br>
-  开发阶段采用 JSON 文件存储（易调试），生产环境无缝切换至 SQLite 关系型数据库（ACID 事务）。智能编码探测机制 100% 解决中文乱码问题，支持 HDF5 格式海量 IQ 数据归档。
+<div class="feature-group-title">C. 平台与运维（可视化、可扩展、可追溯）</div>
+<div class="feature-grid">
+  <div class="feature-card">
+    <strong>🌐 远程管控与态势可视化</strong><br>
+    远程控制 SDR 设备，统一地图/热力图/轨迹回放视图，支持多屏联动。
+  </div>
+  <div class="feature-card">
+    <strong>🗄️ 双引擎数据与证据链</strong><br>
+    开发用 JSON、生产用 SQLite，支持 HDF5 海量 IQ 归档与事件追溯分析。
+  </div>
 </div>
 
 ---
 
+<div id="sec-tech"></div>
 ## ⚙️ 技术原理
 
 <div class="highlight-box" style="background:#f3f8ff;">
@@ -259,18 +534,44 @@ description: 基于SDR与AI的智能无人机防御平台
 </div>
 
 ---
+<div id="sec-arch"></div>
 ## 🏗️ 系统架构
 
-### 3.1 总体架构分层
+<div class="arch-top-nav">
+  <a href="#arch-31">3.1 总体架构</a>
+  <a href="#arch-32">3.2 感知层</a>
+  <a href="#arch-33">3.3 传输层</a>
+  <a href="#arch-34">3.4 处理层</a>
+  <a href="#arch-35">3.5 决策层</a>
+  <a href="#arch-36">3.6 扩展层</a>
+  <a href="#arch-37">3.7 数据流</a>
+</div>
+
+<div class="arch-shell">
+<aside class="arch-sidebar">
+  <h4>目录</h4>
+  <div class="arch-sidebar-links">
+    <a href="#arch-31">3.1 总体架构分层</a>
+    <a href="#arch-32">3.2 感知层</a>
+    <a href="#arch-33">3.3 传输层</a>
+    <a href="#arch-34">3.4 处理层</a>
+    <a href="#arch-35">3.5 决策层</a>
+    <a href="#arch-36">3.6 扩展层</a>
+    <a href="#arch-37">3.7 数据流说明</a>
+  </div>
+</aside>
+<div class="arch-main">
+
+<h3 id="arch-31">3.1 总体架构分层</h3>
 
 系统采用五层纵深防御架构，各层间通过标准化接口解耦，支持横向扩展与组件热插拔。
 
 <div class="layer-stack">
-  <div class="layer-row">扩展层 <em>REST / gRPC / SDK</em></div>
-  <div class="layer-row">决策层 <em>规则引擎 / RL</em></div>
-  <div class="layer-row">处理层 <em>GUI / 存储 / 加速</em></div>
-  <div class="layer-row">传输层 <em>ZeroMQ / SSH</em></div>
-  <div class="layer-row">感知层 <em>SDR / 视觉 / 雷达</em></div>
+  <div class="layer-row">◇ 扩展层 <em>REST / gRPC / SDK</em></div>
+  <div class="layer-row">◆ 决策层 <em>规则引擎 / RL</em></div>
+  <div class="layer-row">▣ 处理层 <em>GUI / 存储 / 加速</em></div>
+  <div class="layer-row">▤ 传输层 <em>ZeroMQ / SSH</em></div>
+  <div class="layer-row">◉ 感知层 <em>SDR / 视觉 / 雷达</em></div>
 </div>
 
 <p align="center">
@@ -278,57 +579,109 @@ description: 基于SDR与AI的智能无人机防御平台
 </p>
 <p align="center">图：系统整体架构</p>
 
-### 3.2 感知层
+<h3 id="arch-32">3.2 感知层</h3>
 
-- **SDR 传感器节点**：  
-  - **主侦测设备**：RTL-SDR（低成本广域扫描）、HackRF One（半双工收发）、PlutoSDR（全双工教学级）。  
-  - **部署方式**：支持 3–8 节点分布式组网，通过 GPS 授时模块（LEA-6T）实现纳秒级同步。  
-  - **自动增益控制（AGC）**：自适应调整射频前端增益，防止强信号阻塞，动态范围 ≥ 80 dB。  
-- **视觉传感器**：  
-  - 工业级 IP 摄像机（H.265 编码，1080p@30fps），支持 RTSP/ONVIF 协议。  
-  - 边缘端部署 Jetson AGX Orin，运行 YOLOv8s 模型（TensorRT 优化），检测帧率 ≥ 30 FPS。  
-- **辅助传感器**：  
-  - 气象站（风速、雨量），用于修正信号传播模型。  
-  - 频谱监测仪（选配），校验 SDR 测量精度。  
+<div class="arch-grid">
+  <div class="arch-card">
+    <h4>◉ SDR 传感器节点</h4>
+    <p>RTL-SDR / HackRF One / PlutoSDR 组合部署。</p>
+    <p>支持 3–8 节点分布式组网，GPS 授时纳秒级同步。</p>
+    <p>AGC 自适应增益控制，动态范围 ≥ 80 dB。</p>
+  </div>
+  <div class="arch-card">
+    <h4>▦ 视觉传感器</h4>
+    <p>工业级 IP 摄像机，H.265 1080p@30fps，RTSP/ONVIF。</p>
+    <p>Jetson AGX Orin 部署 YOLOv8s（TensorRT），检测 ≥ 30 FPS。</p>
+  </div>
+  <div class="arch-card">
+    <h4>◇ 辅助传感器</h4>
+    <p>气象站用于修正信号传播模型。</p>
+    <p>频谱监测仪（选配）用于 SDR 精度校验。</p>
+  </div>
+</div>
 
-### 3.3 传输层
+<h3 id="arch-33">3.3 传输层</h3>
 
-- **低延迟消息总线**：基于 ZeroMQ 的 PUB/SUB 模式，节点间通信延迟 < 10 ms。所有 IQ 数据、特征向量及控制指令均以 Protobuf 格式序列化，压缩比 3:1。  
-- **远程控制通道**：采用 Paramiko SSH 客户端与服务端架构，实现 HackRF 等设备的远程参数配置与数据流获取。支持 USB-over-IP 及 REST/ZeroRPC 两种代理模式，API 与本地 pyhackrf 100% 兼容。  
-- **视频流传输**：通过 GStreamer 管道将 H.264 编码视频推送至 GUI 端，WebRTC 可选，延迟 ≤ 200 ms。  
+<div class="arch-grid">
+  <div class="arch-card">
+    <h4>▤ 低延迟消息总线</h4>
+    <p>基于 ZeroMQ PUB/SUB，节点通信延迟 &lt; 10 ms。</p>
+    <p>IQ 数据与控制指令使用 Protobuf 序列化，压缩比约 3:1。</p>
+  </div>
+  <div class="arch-card">
+    <h4>◆ 远程控制通道</h4>
+    <p>Paramiko SSH 架构远程配置 HackRF 等设备。</p>
+    <p>支持 USB-over-IP、REST/ZeroRPC，API 兼容 pyhackrf。</p>
+  </div>
+  <div class="arch-card">
+    <h4>◈ 视频流传输</h4>
+    <p>GStreamer 推送 H.264 视频到 GUI，WebRTC 可选。</p>
+    <p>端到端延迟 ≤ 200 ms。</p>
+  </div>
+</div>
 
-### 3.4 处理层
+<h3 id="arch-34">3.4 处理层</h3>
 
-- **图形用户界面**：  
-  - 基于 PyQt6 构建，QML 编写部分动态组件，支持深色/浅色主题一键切换。  
-  - 集成 Matplotlib（静态图表）与 PyQtGraph（实时频谱/瀑布图），渲染帧率 ≥ 25 FPS。  
-  - 地图模块：使用 Leaflet.js 嵌入 QWebEngineView，实现 WGS84/GCJ02 坐标实时标绘。  
-- **信号处理加速**：  
-  - 计算密集型算法（FFT、FIR 滤波、相关运算）通过 Cython 编译为 C 扩展，或调用 Numba JIT 即时编译，性能提升 3–5 倍。  
-  - 并行处理：利用 Python 多进程池，将不同频段扫描任务分配到多核 CPU。  
-- **持久化存储**：  
-  - **双引擎架构**：开发阶段使用 JSON 文件（human-readable），生产环境自动切换至 SQLite（事务支持）。  
-  - **大数据存储**：原始 IQ 数据以 HDF5 格式压缩归档，单文件支持 TB 级存储，附带时间戳、中心频率等元数据。  
+<div class="arch-grid">
+  <div class="arch-card">
+    <h4>▣ 图形用户界面</h4>
+    <p>PyQt6 + QML，支持深浅主题切换。</p>
+    <p>Matplotlib + PyQtGraph 实时渲染，频谱帧率 ≥ 25 FPS。</p>
+    <p>Leaflet.js + QWebEngineView 实现实时地图标绘。</p>
+  </div>
+  <div class="arch-card">
+    <h4>◐ 信号处理加速</h4>
+    <p>FFT/FIR/相关运算通过 Cython 或 Numba 加速。</p>
+    <p>多进程并行扫描，多核 CPU 任务分发。</p>
+  </div>
+  <div class="arch-card">
+    <h4>⬒ 持久化存储</h4>
+    <p>开发期 JSON，生产期自动切换 SQLite。</p>
+    <p>原始 IQ 用 HDF5 归档，支持 TB 级并保留元数据。</p>
+  </div>
+</div>
 
-### 3.5 决策层
+<h3 id="arch-35">3.5 决策层</h3>
 
-- **规则引擎**：基于 Rete 算法的轻量级规则库，预置 50+ 条威胁判定规则（如：信号强度 > -70 dBm 且持续 3 s → 可疑；位置接近禁飞区 → 威胁）。支持用户通过 GUI 动态增删规则。  
-- **机器学习推理**：  
-  - **本地推理**：TensorFlow Lite 模型（.tflite）大小 < 10 MB，在 CPU 上单次推理 < 15 ms。  
-  - **硬件加速**：ONNX Runtime 调用 CUDA，在 Jetson 平台上模型推理时间 < 5 ms。  
-- **策略管理**：  
-  - 干扰策略通过 DQN 在线/离线训练生成，参数存储于 SQLite。  
-  - 用户可自定义干扰波形（正弦波、扫频、噪声）及发射时序，通过 HackRF 任意波形生成接口下发。  
+<div class="arch-grid">
+  <div class="arch-card">
+    <h4>◆ 规则引擎</h4>
+    <p>基于 Rete 的轻量规则库，预置 50+ 威胁规则。</p>
+    <p>支持在 GUI 中动态增删规则。</p>
+  </div>
+  <div class="arch-card">
+    <h4>◉ 机器学习推理</h4>
+    <p>TensorFlow Lite 本地推理：模型 &lt; 10 MB，CPU 单次 &lt; 15 ms。</p>
+    <p>ONNX Runtime + CUDA 在 Jetson 推理 &lt; 5 ms。</p>
+  </div>
+  <div class="arch-card">
+    <h4>◇ 策略管理</h4>
+    <p>DQN 在线/离线训练生成干扰策略，参数持久化到 SQLite。</p>
+    <p>支持自定义波形与发射时序，下发到 HackRF。</p>
+  </div>
+</div>
 
-### 3.6 扩展层
+<h3 id="arch-36">3.6 扩展层</h3>
 
-- **API 接口**：  
-  - RESTful API（Flask）：提供设备状态查询、历史威胁检索、干扰启停等操作，JSON 格式交互。  
-  - gRPC 服务：用于高性能跨语言调用，支持 C++/Java/Go 客户端集成。  
-- **Python SDK**：封装核心功能（频谱获取、识别、定位），提供 5 行代码快速接入示例，便于第三方开发者扩展。  
-- **系统集成**：通过 Modbus TCP 与电子围栏系统联动；通过 Syslog 向安防中心转发告警事件。  
+<div class="arch-grid">
+  <div class="arch-card">
+    <h4>▤ API 接口</h4>
+    <p>RESTful API（Flask）提供状态查询、威胁检索与干扰控制。</p>
+    <p>gRPC 支持高性能跨语言调用（C++/Java/Go）。</p>
+  </div>
+  <div class="arch-card">
+    <h4>▣ Python SDK</h4>
+    <p>封装频谱获取、识别与定位能力。</p>
+    <p>提供最小化接入示例，便于第三方扩展。</p>
+  </div>
+  <div class="arch-card">
+    <h4>◈ 系统集成</h4>
+    <p>支持 Modbus TCP 对接电子围栏。</p>
+    <p>支持 Syslog 转发告警到安防中心。</p>
+  </div>
+</div>
 
-### 3.7 数据流说明
+<h3 id="arch-37">3.7 数据流说明</h3>
 
 <div class="flow-board">
   <div class="flow-line">
@@ -369,8 +722,12 @@ description: 基于SDR与AI的智能无人机防御平台
   </div>
 </div>
 
+</div>
+</div>
+
 ---
 
+<div id="sec-metrics"></div>
 ## 📊 性能指标
 
 | 指标项 | 实测值 | 备注 |
@@ -391,6 +748,7 @@ description: 基于SDR与AI的智能无人机防御平台
 
 ---
 
+<div id="sec-stack"></div>
 ## 💻 软件与硬件
 
 ### 5.1 软件栈
@@ -429,6 +787,7 @@ description: 基于SDR与AI的智能无人机防御平台
 
 ---
 
+<div id="sec-meta"></div>
 ## 📦 版本与信息
 
 - **当前版本**：1.0.0（初始稳定版）  
