@@ -1,5 +1,5 @@
 ---
-title: 无人机防御网络系统
+title: SkySentinel Nexus无人机防御网络系统
 layout: home
 nav_order: 1
 description: 基于SDR与AI的智能无人机防御平台
@@ -9,6 +9,30 @@ description: 基于SDR与AI的智能无人机防御平台
   :root {
     --font-body: "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
     --font-heading: "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  }
+  body {
+    background: #dbe3ee;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-image: url("{{ '/background.jpg' | relative_url }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: saturate(1.08) contrast(1.03);
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: linear-gradient(180deg, rgba(241, 245, 249, .55), rgba(226, 232, 240, .45));
   }
   body,
   .main-content,
@@ -24,8 +48,8 @@ description: 基于SDR与AI的智能无人机防御平台
     letter-spacing: .01em;
   }
   .feature-card {
-    background: #f8f9fa;
-    border-left: 4px solid #0d6efd;
+    background: rgba(241, 245, 249, .34);
+    border-left: 4px solid rgba(71, 85, 105, .45);
     padding: 1.2rem;
     margin: 1.5rem 0;
     border-radius: 0 4px 4px 0;
@@ -33,8 +57,8 @@ description: 基于SDR与AI的智能无人机防御平台
   .feature-group-title {
     margin: 1.2rem 0 .6rem;
     font-weight: 700;
-    color: #0b3d91;
-    border-left: 4px solid #60a5fa;
+    color: #334155;
+    border-left: 4px solid rgba(100, 116, 139, .56);
     padding-left: .55rem;
   }
   .feature-grid {
@@ -46,9 +70,11 @@ description: 基于SDR与AI的智能无人机防御平台
     margin: 0;
     border-left-width: 3px;
     border-radius: 10px;
-    background: rgba(255, 255, 255, .76);
-    border: 1px solid rgba(148, 163, 184, .28);
-    box-shadow: 0 6px 18px rgba(15, 23, 42, .05);
+    background: rgba(248, 250, 252, .4);
+    border: 1px solid rgba(148, 163, 184, .24);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, .035);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
   }
   .feature-grid .feature-card strong {
     display: inline-block;
@@ -129,12 +155,16 @@ description: 基于SDR与AI的智能无人机防御平台
   .principle-card:nth-child(6) { background-color: rgba(254, 243, 199, .5); border-color: rgba(245, 158, 11, .42); }
   .principle-card h4 {
     margin: 0 0 .45rem;
-    font-size: 1rem;
+    font-size: 1.14rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #0b3d91;
   }
   .principle-card p {
     margin: .25rem 0;
-    font-size: .92rem;
-    line-height: 1.5;
+    font-size: .88rem;
+    line-height: 1.6;
+    color: #4b5563;
   }
   .layer-stack {
     max-width: 860px;
@@ -234,13 +264,16 @@ description: 基于SDR与AI的智能无人机防御平台
   .arch-card:nth-child(3n) { border-color: rgba(245, 158, 11, .45); background-color: rgba(254, 243, 199, .45); }
   .arch-card h4 {
     margin: 0 0 .45rem;
-    font-size: 1rem;
+    font-size: 1.12rem;
+    font-weight: 700;
+    line-height: 1.3;
     color: #0b3d91;
   }
   .arch-card p {
     margin: .2rem 0;
-    font-size: .92rem;
-    line-height: 1.5;
+    font-size: .88rem;
+    line-height: 1.6;
+    color: #4b5563;
   }
   .arch-top-nav {
     display: flex;
@@ -248,20 +281,20 @@ description: 基于SDR与AI的智能无人机防御平台
     gap: .5rem;
     margin: .8rem 0 1rem;
     padding: .7rem;
-    border: 1px solid rgba(148, 163, 184, .35);
+    border: 1px solid rgba(148, 163, 184, .26);
     border-radius: 12px;
-    background: rgba(255, 255, 255, .7);
+    background: rgba(241, 245, 249, .28);
     backdrop-filter: blur(4px);
   }
   .arch-top-nav a {
     text-decoration: none;
-    color: #0b3d91;
+    color: #334155;
     font-weight: 600;
     font-size: .9rem;
     padding: .35rem .6rem;
-    border: 1px solid rgba(96, 165, 250, .35);
+    border: 1px solid rgba(148, 163, 184, .38);
     border-radius: 999px;
-    background: rgba(239, 246, 255, .85);
+    background: rgba(226, 232, 240, .32);
   }
   .arch-shell {
     display: block;
@@ -300,6 +333,124 @@ description: 基于SDR与AI的智能无人机防御平台
   .arch-main {
     min-width: 0;
   }
+  .product-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .55rem;
+    margin: .9rem 0 1rem;
+    padding: .65rem;
+    border: 1px solid rgba(148, 163, 184, .24);
+    border-radius: 12px;
+    background: rgba(241, 245, 249, .24);
+    backdrop-filter: blur(6px);
+  }
+  .product-nav a {
+    text-decoration: none;
+    color: #334155;
+    font-weight: 600;
+    font-size: .88rem;
+    padding: .34rem .62rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, .34);
+    background: rgba(226, 232, 240, .3);
+  }
+  .product-nav a:hover {
+    background: rgba(203, 213, 225, .42);
+  }
+  .top-info-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: .15rem 0 1rem;
+  }
+  .top-info-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: .28rem .62rem;
+    border-radius: 999px;
+    font-size: .8rem;
+    color: #475569;
+    border: 1px solid rgba(148, 163, 184, .32);
+    background: rgba(226, 232, 240, .24);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .75rem;
+    margin: .85rem 0 1.1rem;
+  }
+  .kpi-card {
+    border: 1px solid rgba(148, 163, 184, .32);
+    border-radius: 14px;
+    padding: .72rem .8rem;
+    background:
+      radial-gradient(120% 120% at 0% 0%, rgba(255,255,255,.62), transparent 55%),
+      rgba(255, 255, 255, .78);
+    box-shadow: 0 8px 22px rgba(15, 23, 42, .06);
+  }
+  .kpi-card:nth-child(1) { border-color: rgba(59, 130, 246, .42); background-color: rgba(219, 234, 254, .45); }
+  .kpi-card:nth-child(2) { border-color: rgba(16, 185, 129, .4); background-color: rgba(209, 250, 229, .43); }
+  .kpi-card:nth-child(3) { border-color: rgba(245, 158, 11, .45); background-color: rgba(254, 243, 199, .44); }
+  .kpi-card:nth-child(4) { border-color: rgba(168, 85, 247, .38); background-color: rgba(243, 232, 255, .5); }
+  .kpi-label {
+    font-size: .78rem;
+    color: #64748b;
+    margin-bottom: .28rem;
+  }
+  .kpi-value {
+    font-size: 1.28rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.2;
+  }
+  .kpi-note {
+    margin-top: .22rem;
+    font-size: .8rem;
+    color: #475569;
+  }
+  .ui-showcase {
+    margin: 1.1rem 0 1.3rem;
+    border: 1px solid rgba(148, 163, 184, .34);
+    border-radius: 18px;
+    padding: 1rem;
+    background:
+      radial-gradient(120% 140% at 0% 0%, rgba(255,255,255,.56), transparent 50%),
+      rgba(255, 255, 255, .46);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 18px 40px rgba(15, 23, 42, .12);
+  }
+  .ui-showcase h3 {
+    margin: 0 0 .7rem;
+    font-size: 1.08rem;
+    color: #0b3d91;
+  }
+  .ui-frame {
+    border-radius: 14px;
+    padding: .6rem;
+    background:
+      linear-gradient(135deg, rgba(59, 130, 246, .32), rgba(16, 185, 129, .26)),
+      rgba(15, 23, 42, .18);
+    box-shadow:
+      0 10px 24px rgba(15, 23, 42, .16),
+      inset 0 1px 0 rgba(255, 255, 255, .4);
+  }
+  .ui-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, .55);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, .24);
+  }
+  .ui-note {
+    margin: .55rem 0 0;
+    font-size: .84rem;
+    color: #475569;
+    text-align: center;
+  }
   @media (max-width: 900px) {
     .arch-sidebar {
       position: static;
@@ -307,22 +458,17 @@ description: 基于SDR与AI的智能无人机防御平台
     .arch-sidebar-links {
       grid-template-columns: 1fr;
     }
+    .kpi-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
   @media (min-width: 50rem) {
     .side-bar {
-      width: 220px;
-      min-width: 220px;
-    }
-    .site-header {
-      max-width: 220px;
-    }
-    .site-nav,
-    .site-footer {
-      width: 220px;
+      display: none !important;
     }
     .main {
-      margin-left: 220px;
-      max-width: none;
+      margin-left: 0 !important;
+      max-width: none !important;
     }
     .main-header,
     .main-content-wrap {
@@ -333,24 +479,24 @@ description: 基于SDR与AI的智能无人机防御平台
       display: block !important;
     }
     .main-content {
-      max-width: none !important;
+      max-width: 1180px !important;
       width: auto !important;
-      margin: 0 !important;
-      padding-left: 1rem !important;
-      padding-right: 1.2rem !important;
+      margin: 0 auto !important;
+      padding: 1.1rem 2rem 3rem !important;
     }
   }
   .page-toc-floating {
     position: fixed;
-    left: 236px;
-    top: 96px;
+    right: 20px;
+    top: 92px;
+    left: auto;
     width: 220px;
     max-height: calc(100vh - 120px);
     overflow: auto;
     z-index: 8;
-    border: 1px solid rgba(148, 163, 184, .35);
+    border: 1px solid rgba(148, 163, 184, .28);
     border-radius: 12px;
-    background: rgba(255, 255, 255, .86);
+    background: rgba(226, 232, 240, .28);
     backdrop-filter: blur(6px);
     box-shadow: 0 10px 24px rgba(15, 23, 42, .08);
     padding: .65rem;
@@ -358,24 +504,87 @@ description: 基于SDR与AI的智能无人机防御平台
   .page-toc-floating h4 {
     margin: 0 0 .45rem;
     font-size: .92rem;
-    color: #0b3d91;
+    color: #334155;
   }
   .page-toc-floating a {
     display: block;
     text-decoration: none;
-    color: #334155;
+    color: #475569;
     padding: .26rem .35rem;
     border-radius: 6px;
     font-size: .86rem;
   }
   .page-toc-floating a.sub {
     padding-left: .95rem;
-    color: #475569;
+    color: #64748b;
     font-size: .82rem;
   }
   .page-toc-floating a:hover {
-    background: rgba(219, 234, 254, .8);
-    color: #0b3d91;
+    background: rgba(148, 163, 184, .24);
+    color: #1e293b;
+  }
+  .main-header {
+    background: rgba(226, 232, 240, .26) !important;
+    border-bottom: 1px solid rgba(148, 163, 184, .24) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .main-header .search {
+    flex: 0 1 360px;
+    max-width: 360px;
+  }
+  .main-header .aux-nav {
+    margin-left: auto;
+  }
+  .header-quick {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45rem;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0 .8rem;
+  }
+  .header-quick-item {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: .78rem;
+    color: #475569;
+    border: 1px solid rgba(148, 163, 184, .32);
+    background: rgba(226, 232, 240, .3);
+    border-radius: 999px;
+    padding: .22rem .58rem;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .search-input,
+  .search-input:focus {
+    background: rgba(248, 250, 252, .42) !important;
+    border-color: rgba(148, 163, 184, .3) !important;
+  }
+  .aux-nav .site-button {
+    background: rgba(226, 232, 240, .34) !important;
+    border: 1px solid rgba(148, 163, 184, .3) !important;
+    color: #334155 !important;
+  }
+  .aux-nav .site-button:hover {
+    background: rgba(203, 213, 225, .42) !important;
+    color: #1e293b !important;
+  }
+  .arch-sidebar {
+    border-color: rgba(148, 163, 184, .28);
+    background: rgba(226, 232, 240, .24);
+  }
+  .arch-sidebar h4 {
+    color: #334155;
+  }
+  .arch-sidebar a {
+    color: #475569;
+  }
+  .arch-sidebar a:hover {
+    background: rgba(148, 163, 184, .24);
+    color: #1e293b;
   }
   .table-wrapper table,
   table {
@@ -401,17 +610,89 @@ description: 基于SDR与AI的智能无人机防御平台
   table thead tr {
     background: rgba(219, 234, 254, .86) !important;
   }
+  .feature-grid .feature-card,
+  .principle-card,
+  .arch-card,
+  .kpi-card,
+  .ui-showcase,
+  .flow-box,
+  .top-info-chip,
+  .header-quick-item {
+    transition:
+      transform .22s ease,
+      box-shadow .22s ease,
+      border-color .22s ease,
+      background-color .22s ease;
+    transform-origin: center;
+    will-change: transform;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .feature-grid .feature-card:hover,
+    .principle-card:hover,
+    .arch-card:hover,
+    .kpi-card:hover,
+    .ui-showcase:hover,
+    .flow-box:hover,
+    .top-info-chip:hover,
+    .header-quick-item:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, .14);
+      border-color: rgba(59, 130, 246, .35);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .feature-grid .feature-card,
+    .principle-card,
+    .arch-card,
+    .kpi-card,
+    .ui-showcase,
+    .flow-box,
+    .top-info-chip,
+    .header-quick-item {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
   @media (max-width: 1400px) {
     .page-toc-floating {
       display: none;
     }
   }
+  @media (max-width: 900px) {
+    .header-quick {
+      display: none;
+    }
+    .main-header .search {
+      flex: 1 1 auto;
+      max-width: none;
+    }
+  }
 </style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var header = document.getElementById("main-header");
+    if (!header || header.querySelector(".header-quick")) return;
+    var quick = document.createElement("div");
+    quick.className = "header-quick";
+    quick.innerHTML =
+      '<span class="header-quick-item">版本：v1.0.0</span>' +
+      '<span class="header-quick-item">系统状态：稳定（样例）</span>' +
+      '<span class="header-quick-item">覆盖频段：20 MHz - 6 GHz</span>';
+    var aux = header.querySelector(".aux-nav");
+    if (aux) {
+      header.insertBefore(quick, aux);
+    } else {
+      header.appendChild(quick);
+    }
+  });
+</script>
 
 
 <div class="page-toc-floating">
   <h4>全文目录</h4>
   <a href="#sec-overview">系统概述</a>
+  <a href="#sec-ui">界面展示</a>
   <a href="#sec-core">核心功能</a>
   <a href="#sec-tech">技术原理</a>
   <a href="#sec-arch">系统架构</a>
@@ -428,11 +709,62 @@ description: 基于SDR与AI的智能无人机防御平台
 </div>
 
 <div id="sec-overview"></div>
-# 无人机防御网络系统  
+# SkySentinel Nexus 无人机防御网络系统  
 **基于SDR与AI的智能电磁感知与精准反制平台**  
+
+<div class="product-nav">
+  <a href="#sec-overview">系统概述</a>
+  <a href="#sec-ui">界面展示</a>
+  <a href="#sec-core">核心功能</a>
+  <a href="#sec-tech">技术原理</a>
+  <a href="#sec-arch">系统架构</a>
+  <a href="#sec-metrics">性能指标</a>
+  <a href="#sec-stack">软硬件栈</a>
+  <a href="#sec-meta">版本信息</a>
+</div>
+<div class="top-info-bar">
+  <span class="top-info-chip">部署形态：本地 / 边缘 / 云端（样例）</span>
+  <span class="top-info-chip">更新频率：每月迭代（样例）</span>
+  <span class="top-info-chip">服务支持：7×24 技术支持（样例）</span>
+  <span class="top-info-chip">交付方式：源码 + 文档 + 培训（样例）</span>
+</div>
+
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <div class="kpi-label">识别准确率</div>
+    <div class="kpi-value">94.7%</div>
+    <div class="kpi-note">高信噪比 ≥ 20 dB</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">定位精度</div>
+    <div class="kpi-value">≤ 3 m</div>
+    <div class="kpi-note">二维定位（4 节点）</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">干扰成功率</div>
+    <div class="kpi-value">95%</div>
+    <div class="kpi-note">500 m 内主流机型</div>
+  </div>
+  <div class="kpi-card">
+    <div class="kpi-label">系统可用性</div>
+    <div class="kpi-value">99.95%</div>
+    <div class="kpi-note">MTBF &gt; 12,000 小时</div>
+  </div>
+</div>
 
 <div class="highlight-box">
   <p>🚀 <strong>系统概述</strong>：本系统是业界首套将软件定义无线电（SDR）、深度学习、高精度定位与自适应干扰技术深度融合的智能安防平台。采用“侦—识—定—扰—评”五维闭环架构，从电磁频谱感知到多手段协同反制，实现全天候、全频段、全协议的低空无人机防御，关键技术指标达到国际先进水平。</p>
+</div>
+
+<div id="sec-ui"></div>
+## 🖥️ 界面展示
+
+<div class="ui-showcase">
+  <h3>主控平台界面</h3>
+  <div class="ui-frame">
+    <img src="{{ '/main_page.png' | relative_url }}" alt="无人机防御网络系统主界面">
+  </div>
+  <p class="ui-note">系统主界面展示（实时频谱、态势信息与控制面板）</p>
 </div>
 
 ---
@@ -575,9 +907,9 @@ description: 基于SDR与AI的智能无人机防御平台
 </div>
 
 <p align="center">
-  <img src="{{ '/图片1.png' | relative_url }}" alt="系统整体架构图" width="920">
+  <img src="{{ '/image.png' | relative_url }}" alt="系统整体架构图" width="920">
 </p>
-<p align="center">图：系统整体架构</p>
+<p align="center">系统整体架构</p>
 
 <h3 id="arch-32">3.2 感知层</h3>
 
@@ -793,6 +1125,7 @@ description: 基于SDR与AI的智能无人机防御平台
 - **当前版本**：1.0.0（初始稳定版）  
 - **发布日期**：2025 年 12 月  
 - **开发团队**：Xuhui Li, Qixin Duan  
+- **联系邮箱**：lixuhui25@mails.ucas.ac.cn  
 - **开源协议**：[Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)  
 - **兼容系统**：Ubuntu 20.04/22.04、Windows 10/11（WSL2）、CentOS 7+  
 - **硬件依赖**：HackRF One / RTL-SDR（必需），NVIDIA GPU（推荐）  
