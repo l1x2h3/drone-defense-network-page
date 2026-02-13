@@ -767,6 +767,31 @@ description: 基于SDR与AI的智能无人机防御平台
   }
 </style>
 
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var header = document.getElementById("main-header");
+    if (!header || header.querySelector(".header-quick")) return;
+
+    var quick = document.createElement("div");
+    quick.className = "header-quick";
+    quick.innerHTML =
+      '<span class="header-quick-item"><a href="{{ '/' | relative_url }}">Page 1: Overview</a></span>' +
+      '<span class="header-quick-item"><a href="{{ '/database/' | relative_url }}">Page 2: Database</a></span>' +
+      '<span class="header-quick-item"><a href="{{ '/test-report/' | relative_url }}">Page 3: Test Report</a></span>' +
+      '<span class="header-quick-item">Version: v1.0.0</span>' +
+      '<span class="header-quick-item">System: Stable (sample)</span>';
+
+    var aux = header.querySelector(".aux-nav");
+    if (aux) {
+      header.insertBefore(quick, aux);
+    } else {
+      header.appendChild(quick);
+    }
+  });
+</script>
+
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     var targets = document.querySelectorAll(".ui-frame img, .ui-gallery-frame img");
@@ -777,7 +802,7 @@ description: 基于SDR与AI的智能无人机防御平台
     overlay.setAttribute("aria-hidden", "true");
     overlay.innerHTML =
       '<div class="img-lightbox-content">' +
-      '<button class="img-lightbox-close" type="button" aria-label="Close">×</button>' +
+      '<button class="img-lightbox-close" type="button" aria-label="Close">&times;</button>' +
       '<img alt="preview">' +
       '</div>';
 
@@ -819,24 +844,6 @@ description: 基于SDR与AI的智能无人机防御平台
     });
   });
 </script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var header = document.getElementById("main-header");
-    if (!header || header.querySelector(".header-quick")) return;
-    var quick = document.createElement("div");
-    quick.className = "header-quick";
-    quick.innerHTML =
-      '<span class="header-quick-item">版本：v1.0.0</span>' +
-      '<span class="header-quick-item">系统状态：稳定（样例）</span>' +
-      '<span class="header-quick-item">覆盖频段：20 MHz - 6 GHz</span>';
-    var aux = header.querySelector(".aux-nav");
-    if (aux) {
-      header.insertBefore(quick, aux);
-    } else {
-      header.appendChild(quick);
-    }
-  });
-</script>
 
 
 <div class="page-toc-floating">
@@ -862,16 +869,6 @@ description: 基于SDR与AI的智能无人机防御平台
 # SkySentinel Nexus 无人机防御网络系统  
 **基于SDR与AI的智能电磁感知与精准反制平台**  
 
-<div class="product-nav">
-  <a href="#sec-overview">系统概述</a>
-  <a href="#sec-ui">界面展示</a>
-  <a href="#sec-core">核心功能</a>
-  <a href="#sec-tech">技术原理</a>
-  <a href="#sec-arch">系统架构</a>
-  <a href="#sec-metrics">性能指标</a>
-  <a href="#sec-stack">软硬件栈</a>
-  <a href="#sec-meta">版本信息</a>
-</div>
 <div class="top-info-bar">
   <span class="top-info-chip">部署形态：本地 / 边缘 / 云端（样例）</span>
   <span class="top-info-chip">更新频率：每月迭代（样例）</span>
@@ -1288,3 +1285,7 @@ description: 基于SDR与AI的智能无人机防御平台
 ---
 
 *文档版本：1.0 · 最后更新：2026 年 2 月*
+
+---
+
+---
