@@ -18,7 +18,7 @@ description: 基于SDR与AI的智能无人机防御平台
     position: fixed;
     inset: 0;
     z-index: -2;
-    background-image: url("{{ '/background.jpg' | relative_url }}");
+    background-image: url("{{ '/assets/images/background.jpg' | relative_url }}");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -451,6 +451,96 @@ description: 基于SDR与AI的智能无人机防御平台
     color: #475569;
     text-align: center;
   }
+  .ui-gallery {
+    margin-top: .95rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .8rem;
+  }
+  .ui-gallery-card {
+    border: 1px solid rgba(148, 163, 184, .34);
+    border-radius: 12px;
+    padding: .55rem;
+    background: rgba(255, 255, 255, .72);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, .08);
+  }
+  .ui-gallery-title {
+    font-size: .86rem;
+    font-weight: 700;
+    color: #334155;
+    margin: 0 0 .45rem;
+    text-align: center;
+  }
+  .ui-gallery-frame {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(226, 232, 240, .85);
+    background: rgba(241, 245, 249, .68);
+  }
+  .ui-gallery-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .ui-frame img,
+  .ui-gallery-frame img {
+    cursor: zoom-in;
+  }
+  .img-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.2rem 1rem;
+    background: rgba(2, 6, 23, .72);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .24s ease, visibility .24s ease;
+  }
+  .img-lightbox.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+  .img-lightbox-content {
+    position: relative;
+    width: min(1100px, 92vw);
+    max-height: 88vh;
+    transform: scale(.94);
+    opacity: 0;
+    transition: transform .26s ease, opacity .26s ease;
+  }
+  .img-lightbox.is-open .img-lightbox-content {
+    transform: scale(1);
+    opacity: 1;
+  }
+  .img-lightbox img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, .36);
+    box-shadow: 0 24px 70px rgba(2, 6, 23, .45);
+    background: rgba(15, 23, 42, .45);
+  }
+  .img-lightbox-close {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, .82);
+    color: #f8fafc;
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(2, 6, 23, .35);
+  }
   @media (max-width: 900px) {
     .arch-sidebar {
       position: static;
@@ -459,6 +549,9 @@ description: 基于SDR与AI的智能无人机防御平台
       grid-template-columns: 1fr;
     }
     .kpi-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ui-gallery {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
@@ -667,8 +760,65 @@ description: 基于SDR与AI的智能无人机防御平台
       max-width: none;
     }
   }
+  @media (max-width: 560px) {
+    .ui-gallery {
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var targets = document.querySelectorAll(".ui-frame img, .ui-gallery-frame img");
+    if (!targets.length) return;
+
+    var overlay = document.createElement("div");
+    overlay.className = "img-lightbox";
+    overlay.setAttribute("aria-hidden", "true");
+    overlay.innerHTML =
+      '<div class="img-lightbox-content">' +
+      '<button class="img-lightbox-close" type="button" aria-label="Close">×</button>' +
+      '<img alt="preview">' +
+      '</div>';
+
+    document.body.appendChild(overlay);
+
+    var preview = overlay.querySelector("img");
+    var closeBtn = overlay.querySelector(".img-lightbox-close");
+
+    function closeLightbox() {
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    function openLightbox(src, alt) {
+      preview.src = src;
+      preview.alt = alt || "preview";
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    targets.forEach(function (img) {
+      img.addEventListener("click", function () {
+        openLightbox(img.currentSrc || img.src, img.alt);
+      });
+    });
+
+    overlay.addEventListener("click", function (ev) {
+      if (ev.target === overlay) closeLightbox();
+    });
+
+    closeBtn.addEventListener("click", closeLightbox);
+
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape" && overlay.classList.contains("is-open")) {
+        closeLightbox();
+      }
+    });
+  });
+</script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     var header = document.getElementById("main-header");
@@ -760,54 +910,51 @@ description: 基于SDR与AI的智能无人机防御平台
 ## 🖥️ 界面展示
 
 <div class="ui-showcase">
-  <h3>主控平台界面</h3>
+  <h3>&#20027;&#25511;&#24179;&#21488;&#30028;&#38754;</h3>
   <div class="ui-frame">
-    <img src="{{ '/main_page.png' | relative_url }}" alt="无人机防御网络系统主界面">
+    <img src="{{ '/assets/images/main_page.png' | relative_url }}" alt="&#26080;&#20154;&#26426;&#38450;&#24481;&#32593;&#32476;&#31995;&#32479;&#20027;&#30028;&#38754;">
   </div>
-  <p class="ui-note">系统主界面展示（实时频谱、态势信息与控制面板）</p>
-</div>
+  <p class="ui-note">&#31995;&#32479;&#20027;&#30028;&#38754;&#23637;&#31034;&#65288;&#23454;&#26102;&#39057;&#35889;&#12289;&#24577;&#21183;&#20449;&#24687;&#19982;&#25511;&#21046;&#38754;&#26495;&#65289;</p>
 
----
-
-<div id="sec-core"></div>
-## 🔧 核心功能
-
-<div class="feature-group-title">A. 侦测与识别（先发现、再认清）</div>
-<div class="feature-grid">
-  <div class="feature-card">
-    <strong>📡 全频段频谱侦测</strong><br>
-    20 MHz – 6 GHz 覆盖，多协议兼容，毫秒级频谱刷新与跳频识别。
-  </div>
-  <div class="feature-card">
-    <strong>🧠 多模态智能识别</strong><br>
-    RF 指纹 + 时频特征 + CNN/SVM，支持 30+ 机型实时分类，新协议识别准确率 ≥92%。
-  </div>
-</div>
-
-<div class="feature-group-title">B. 定位与反制（先锁定、再处置）</div>
-<div class="feature-grid">
-  <div class="feature-card">
-    <strong>📍 融合定位与跟踪</strong><br>
-    TDOA+AOA 融合定位，误差 ≤3 m；卡尔曼轨迹预测支持动态连续跟踪。
-  </div>
-  <div class="feature-card">
-    <strong>⚡ 自适应干扰对抗</strong><br>
-    DQN 动态调参，支持噪声压制、协议级欺骗与链路阻断，策略毫秒级切换。
-  </div>
-</div>
-
-<div class="feature-group-title">C. 平台与运维（可视化、可扩展、可追溯）</div>
-<div class="feature-grid">
-  <div class="feature-card">
-    <strong>🌐 远程管控与态势可视化</strong><br>
-    远程控制 SDR 设备，统一地图/热力图/轨迹回放视图，支持多屏联动。
-  </div>
-  <div class="feature-card">
-    <strong>🗄️ 双引擎数据与证据链</strong><br>
-    开发用 JSON、生产用 SQLite，支持 HDF5 海量 IQ 归档与事件追溯分析。
+  <div class="ui-gallery">
+    <div class="ui-gallery-card">
+      <div class="ui-gallery-title">GPS &#25915;&#20987;&#30028;&#38754;</div>
+      <div class="ui-gallery-frame">
+        <img src="{{ '/assets/images/gps_attack.png' | relative_url }}" alt="GPS &#25915;&#20987;&#30028;&#38754;">
+      </div>
+    </div>
+    <div class="ui-gallery-card">
+      <div class="ui-gallery-title">HackRF &#26816;&#27979;&#30028;&#38754;</div>
+      <div class="ui-gallery-frame">
+        <img src="{{ '/assets/images/hackrf_detection.png' | relative_url }}" alt="HackRF &#26816;&#27979;&#30028;&#38754;">
+      </div>
+    </div>
+    <div class="ui-gallery-card">
+      <div class="ui-gallery-title">HackRF One &#20998;&#26512;&#30028;&#38754;</div>
+      <div class="ui-gallery-frame">
+        <img src="{{ '/assets/images/hackrf_one_analysis.png' | relative_url }}" alt="HackRF One &#20998;&#26512;&#30028;&#38754;">
+      </div>
+    </div>
+    <div class="ui-gallery-card">
+      <div class="ui-gallery-title">MAVLink &#39029;&#38754;</div>
+      <div class="ui-gallery-frame">
+        <img src="{{ '/assets/images/marvlink_page.png' | relative_url }}" alt="MAVLink &#39029;&#38754;">
+      </div>
+    </div>
+    <div class="ui-gallery-card">
+      <div class="ui-gallery-title">&#20449;&#21495;&#21457;&#23556;&#30028;&#38754;</div>
+      <div class="ui-gallery-frame">
+        <img src="{{ '/assets/images/signal_send.png' | relative_url }}" alt="&#20449;&#21495;&#21457;&#23556;&#30028;&#38754;">
+      </div>
+    </div>
+    <div class="ui-gallery-card">
+      <div class="ui-gallery-title">YOLO &#39029;&#38754;</div>
+      <div class="ui-gallery-frame">
+        <img src="{{ '/assets/images/yolo_page.png' | relative_url }}" alt="YOLO &#39029;&#38754;">
+      </div>
+    </div>
   </div>
 </div>
-
 ---
 
 <div id="sec-tech"></div>
@@ -907,7 +1054,7 @@ description: 基于SDR与AI的智能无人机防御平台
 </div>
 
 <p align="center">
-  <img src="{{ '/image.png' | relative_url }}" alt="系统整体架构图" width="920">
+  <img src="{{ '/assets/images/image.png' | relative_url }}" alt="系统整体架构图" width="920">
 </p>
 <p align="center">系统整体架构</p>
 
@@ -923,7 +1070,7 @@ description: 基于SDR与AI的智能无人机防御平台
   <div class="arch-card">
     <h4>▦ 视觉传感器</h4>
     <p>工业级 IP 摄像机，H.265 1080p@30fps，RTSP/ONVIF。</p>
-    <p>Jetson AGX Orin 部署 YOLOv8s（TensorRT），检测 ≥ 30 FPS。</p>
+    <p>Jetson AGX Orin 部署 YOLO 页面v8s（TensorRT），检测 ≥ 30 FPS。</p>
   </div>
   <div class="arch-card">
     <h4>◇ 辅助传感器</h4>
@@ -1075,7 +1222,7 @@ description: 基于SDR与AI的智能无人机防御平台
 | **并发目标** | 单节点 12 个，多节点协同 ≥ 50 个 | 基于 ZeroMQ 负载均衡 |
 | **系统可用性** | 99.95% | MTBF > 12,000 小时 |
 | **误报率** | ≤ 2.1% | 标准电磁环境，无刻意干扰 |
-| **页面加载性能** | 首次启动 26.7 s，后续平均 8.6 s | 瓶颈为 YOLO 模型加载，已优化为异步预加载 |
+| **页面加载性能** | 首次启动 26.7 s，后续平均 8.6 s | 瓶颈为 YOLO 页面 模型加载，已优化为异步预加载 |
 | **最大 IQ 记录速率** | 80 MB/s | HDF5 直接写入，无丢包 |
 
 ---
@@ -1096,7 +1243,7 @@ description: 基于SDR与AI的智能无人机防御平台
 | **数据库** | SQLite, JSON, HDF5 | 结构化数据、IQ 归档 | 双引擎切换，压缩存储 |
 | **通信中间件** | ZeroMQ, Protobuf | 节点间通信 | 微秒级延迟，跨语言 |
 | **远程控制** | Paramiko, gRPC | SSH 远程设备控制 | API 兼容 pyhackrf |
-| **协议分析** | Scapy | WiFi/MAVLink 包构造 | 灵活、可编程 |
+| **协议分析** | Scapy | WiFi/MAVLink 页面 包构造 | 灵活、可编程 |
 | **视频处理** | OpenCV, GStreamer | 视频流捕获与显示 | 硬件解码支持 |
 | **Web 集成** | PyQt6.QWebEngineView | 内嵌地图、仪表盘 | JavaScript 双向通信 |
 | **性能分析** | cProfile, py-spy | 热点定位 | 用于持续优化 |
