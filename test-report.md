@@ -109,81 +109,11 @@ permalink: /test-report/
   </table>
 </div>
 
-<div class="test-card">
-  <h3>3. Evidence</h3>
-  <p>Paste screenshots, logs, charts, and short observations here.</p>
-  <p>- Screenshot A: ...</p>
-  <p>- Screenshot B: ...</p>
-  <p>- Log summary: ...</p>
 
 
 
 
-<script>
-(function() {
-  function init() {
-    // 获取四张图片元素
-    const imageIds = [
-      'average_page_load_time',
-      'page_load_time_percentage',
-      'total_load_time_per_run',
-      'yolo_intrusion_load_time_per_run'
-    ];
-    const images = imageIds.map(id => document.getElementById(id)).filter(img => img !== null);
-    if (images.length === 0) return;
-    // 创建浮动坐标层
-    const floatText = document.createElement('div');
-    floatText.textContent = '';
-    floatText.style.position = 'absolute';
-    floatText.style.display = 'none';
-    floatText.style.pointerEvents = 'none';
-    floatText.style.zIndex = '9999';
-    floatText.style.whiteSpace = 'nowrap';
-    document.body.appendChild(floatText);
-    // 更新浮层内容和位置
-    function updateFloat(e) {
-      const img = e.currentTarget;               // 当前悬浮的图片
-      const rect = img.getBoundingClientRect();
-      // 图片未加载完成时宽度为0，隐藏浮层
-      if (rect.width === 0) {
-        floatText.style.display = 'none';
-        return;
-      }
-      // 计算相对于图片左上角的坐标
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
-      // 确保坐标在图片范围内（理论上总是成立，但做保护）
-      if (mouseX >= 0 && mouseX <= rect.width && mouseY >= 0 && mouseY <= rect.height) {
-        floatText.textContent = `(${Math.round(mouseX)}, ${Math.round(mouseY)})`;
-        floatText.style.display = 'block';
-        // 将浮层置于鼠标右下方10px处
-        floatText.style.left = (e.pageX + 10) + 'px';
-        floatText.style.top = (e.pageY + 10) + 'px';
-      } else {
-        floatText.style.display = 'none';
-      }
-    }
-    function hideFloat() {
-      floatText.style.display = 'none';
-    }
-    // 为每张图片绑定必要的事件
-    images.forEach(img => {
-      img.addEventListener('mouseenter', updateFloat);   // 鼠标进入时立即显示
-      img.addEventListener('mousemove', updateFloat);    // 鼠标移动时更新
-      img.addEventListener('mouseleave', hideFloat);     // 鼠标离开时隐藏
-    });
-  }
-  // 等待 DOM 加载完成
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-</script>
-<!-- 定义一个CSS样式块，用于控制页面中图片行的布局和图片的显示方式 -->
 <style>
-  /* 设置图片行的flex容器样式：子元素水平均匀分布，垂直居中，底部边距20px，宽度100% */
   .image-row {
     display: flex;
     justify-content: space-around;
@@ -191,39 +121,131 @@ permalink: /test-report/
     margin-bottom: 20px;
     width: 100%;
   }
-  /* 设置图片行内所有img元素的统一样式：宽高比强制为4:3，高度自动，图片保持原始比例适应容器（可能留有空白） */
   .image-row img {
     aspect-ratio: 4/3;
     height: auto;
     object-fit: contain;
+    width: 100%;
   }
-  /* 为特定id的图片设置最大宽度，以控制其在页面上的显示大小 */
-  #average_page_load_time {
-    max-width: 47%;
+  .image-figure {
+    margin: 0;
+    text-align: center;
+    width: 100%;
   }
-  #page_load_time_percentage {
-    max-width: 43%;
+  .image-figure figcaption {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    line-height: 1.4;
   }
-  #total_load_time_per_run {
-    max-width: 45%;
+  .fixed-caption {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    line-height: 1.4;
+    text-align: center;
   }
-  #yolo_intrusion_load_time_per_run {
-    max-width: 45%;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 40, 80, 0.2);
+    font-size: 14px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th, td {
+    border: 1px solid #b0c4de;
+    padding: 8px 6px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  th {
+    background-color: #1e3a5f;   /* 深科技蓝 */
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+  tr:nth-child(even) {
+    background-color: #e9f0f9;   /* 极浅蓝 */
+  }
+  tr:hover {
+    background-color: #c7ddf5;   /* 中等蓝 */
+  }
+  td:first-child {
+    font-weight: 500;
+    text-align: left;
+    background-color: #f0f7ff;
+  }
+  .total-row {
+    background-color: #b8d1f0 !important;  /* 柔和蓝 */
+    font-weight: bold;
+  }
+  .total-row td:first-child {
+    background-color: #b8d1f0 !important;
+  }
+  .average-col {
+    background-color: #d4e4fc;   /* 浅蓝灰 */
+    font-weight: 500;
   }
 </style>
+<div class="test-card">
+  <h3>3. 测试结果与分析</h3>
+<p>&emsp;&emsp;通过进行测试，我们得到了如表3-1所示的表格。从表格中的测试数据可以看出，系统在第一次运行时加载时间最长，后续运行逐渐变短：首次运行总加载耗时26.69s，而到了第十次运行时总加载耗时8.61s，平均加载耗时11.62s。</p>
+<div class="fixed-caption">表3-1 连续十次运行各页面加载耗时</div>
+<table>
+  <thead>
+    <tr>
+      <th>页面名称</th><th>第1次运行/s</th><th>第2次运行/s</th><th>第3次运行/s</th><th>第4次运行/s</th><th>第5次运行/s</th><th>第6次运行/s</th><th>第7次运行/s</th><th>第8次运行/s</th><th>第9次运行/s</th><th>第10次运行/s</th><th>平均加载各页面用时/s</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>主页</td><td>1.4019</td><td>0.2295</td><td>0.2117</td><td>0.2167</td><td>0.2276</td><td>0.22</td><td>0.2085</td><td>0.2158</td><td>0.2098</td><td>0.2153</td><td>0.33568</td></tr>
+    <tr><td>设置页</td><td>0.0008</td><td>0.0009</td><td>0.0008</td><td>0.0008</td><td>0.0008</td><td>0.0008</td><td>0.0008</td><td>0.001</td><td>0.0007</td><td>0.0007</td><td>0.00081</td></tr>
+    <tr><td>关于页</td><td>0.4937</td><td>0.4399</td><td>0.4544</td><td>0.4379</td><td>0.4659</td><td>0.4358</td><td>0.4421</td><td>0.4491</td><td>0.4367</td><td>0.4344</td><td>0.44899</td></tr>
+    <tr><td>设备列表页</td><td>0.0086</td><td>0.0045</td><td>0.0046</td><td>0.0062</td><td>0.0052</td><td>0.0044</td><td>0.0044</td><td>0.0046</td><td>0.0045</td><td>0.0045</td><td>0.00515</td></tr>
+    <tr><td>告警页</td><td>0.0315</td><td>0.0218</td><td>0.0224</td><td>0.0215</td><td>0.0226</td><td>0.026</td><td>0.0207</td><td>0.0239</td><td>0.0213</td><td>0.022</td><td>0.02337</td></tr>
+    <tr><td>群组管理页</td><td>0.005</td><td>0.0026</td><td>0.0031</td><td>0.0025</td><td>0.0024</td><td>0.0026</td><td>0.0028</td><td>0.0033</td><td>0.0023</td><td>0.0025</td><td>0.00291</td></tr>
+    <tr><td>入侵统计页</td><td>3.9642</td><td>5.2052</td><td>4.8284</td><td>3.7606</td><td>7.164</td><td>4.1074</td><td>4.4833</td><td>3.9383</td><td>3.5984</td><td>3.5543</td><td>4.46041</td></tr>
+    <tr><td>发射页面</td><td>0.0144</td><td>0.0131</td><td>0.0113</td><td>0.0109</td><td>0.0107</td><td>0.0099</td><td>0.0099</td><td>0.0092</td><td>0.0106</td><td>0.0115</td><td>0.01115</td></tr>
+    <tr><td>定位管理页</td><td>0.0635</td><td>0.0524</td><td>0.0471</td><td>0.0495</td><td>0.053</td><td>0.0479</td><td>0.0436</td><td>0.0474</td><td>0.0469</td><td>0.0468</td><td>0.04981</td></tr>
+    <tr><td>Marvlink页</td><td>0.1762</td><td>0.0994</td><td>0.0688</td><td>0.0638</td><td>0.0893</td><td>0.0656</td><td>0.0616</td><td>0.0734</td><td>0.0765</td><td>0.0694</td><td>0.0844</td></tr>
+    <tr><td>WiFi攻击页</td><td>0.0264</td><td>0.0256</td><td>0.0227</td><td>0.0199</td><td>0.0231</td><td>0.0175</td><td>0.0158</td><td>0.0173</td><td>0.0162</td><td>0.0206</td><td>0.02051</td></tr>
+    <tr><td>GPS攻击页</td><td>0.0277</td><td>0.0214</td><td>0.0245</td><td>0.0201</td><td>0.0217</td><td>0.0149</td><td>0.012</td><td>0.0126</td><td>0.0181</td><td>0.0131</td><td>0.01861</td></tr>
+    <tr><td>YOLO检测页</td><td>19.3653</td><td>4.6759</td><td>3.9861</td><td>4.6639</td><td>3.9291</td><td>4.0313</td><td>3.8941</td><td>4.2966</td><td>3.8886</td><td>3.8325</td><td>5.65634</td></tr>
+    <tr><td>信号处理页</td><td>1.1082</td><td>0.5208</td><td>0.472</td><td>0.4988</td><td>0.4137</td><td>0.3923</td><td>0.3816</td><td>0.4295</td><td>0.4033</td><td>0.3873</td><td>0.50075</td></tr>
+    <tr class="total-row"><td>总计</td><td>26.6874</td><td>11.313</td><td>10.1579</td><td>9.7731</td><td>12.4291</td><td>9.3764</td><td>9.5812</td><td>9.522</td><td>8.7339</td><td>8.6149</td><td>11.61889</td></tr>
+  </tbody>
+</table>
+<p>&emsp;&emsp;根据表格中的数据，我们首先发现：<strong>系统加载时的性能瓶颈主要位于YOLO检测页与入侵统计页。</strong>连续10次运行后，YOLO检测页平均加载用时5.66s，入侵统计页平均加载用时4.46s，这两个页面的平均加载用时均远超信号处理页、关于页与主页等其它页面，如图3-1所示。而在图3-2所示的饼状图中也能够看到，加载YOLO检测页与入侵统计页这两个页面所用时间占比分别为48.68%与38.39%，均远超其它页面。</p>
 <!-- 第一个图片行，包含两张并排显示的图片 -->
 <div class="image-row">
-  <!-- 显示平均页面加载时间的图片，src使用Liquid模板从站点的相对路径生成 -->
-  <img id="average_page_load_time" src="{{ '/assets/images/average_page_load_time.png' | relative_url }}" alt="">
-  <!-- 显示页面加载时间百分比的图片，同样使用Liquid模板生成路径 -->
-  <img id="page_load_time_percentage" src="{{ '/assets/images/page_load_time_percentage.png' | relative_url }}" alt="">
+  <figure class="image-figure">
+    <!-- 显示平均页面加载时间的图片，src使用Liquid模板从站点的相对路径生成 -->
+    <img id="average_page_load_time" src="{{ '/assets/images/average_page_load_time.png' | relative_url }}" alt="">
+    <figcaption>图3-1 各页面平均加载用时</figcaption>
+  </figure>
+  <figure class="image-figure">
+    <!-- 显示页面加载时间百分比的图片，同样使用Liquid模板生成路径 -->
+    <img id="page_load_time_percentage" src="{{ '/assets/images/page_load_time_percentage.png' | relative_url }}" alt="">
+    <figcaption>图3-2 各页面加载用时比例</figcaption>
+  </figure>
 </div>
+<p>&emsp;&emsp;其次，<strong>系统初次加载耗时远高于后续加载耗时，尤其是YOLO检测页。</strong>系统初次运行时总加载用时高达26.69s，但是却在第二次运行时骤降至11.31s，之后不断走低，在第四次运行时加载用时低至9.77s。虽然在第五次运行时加载用时突增至12.43s，但是加载用时递减的趋势仍然持续，最终在第十次运行时加载用时8.61s，如图3-3所示。跟据图3-4，初次加载YOLO检测页时用时高达19.37s，随后骤降至4.68s，最终稳定在3.83s左右，而入侵统计页的加载用时则相对稳定在4s以下，仅在第五次运行时加载用时短暂升高至7.16s，因此由图3-4可知，虽然系统加载时的性能瓶颈主要位于YOLO检测页与入侵统计页，但是导致初次加载耗时远高于后续加载的并不是入侵统计页，而是YOLO检测页。</p>
 <!-- 第二个图片行，包含另外两张并排显示的图片 -->
 <div class="image-row">
-  <!-- 显示每次运行总加载时间的图片，路径由Liquid模板生成 -->
-  <img id="total_load_time_per_run" src="{{ '/assets/images/total_load_time_per_run.png' | relative_url }}" alt="">
-  <!-- 显示每次运行YOLO入侵检测加载时间的图片，路径由Liquid模板生成 -->
-  <img id="yolo_intrusion_load_time_per_run" src="{{ '/assets/images/yolo_intrusion_load_time_per_run.png' | relative_url }}" alt="">
+  <figure class="image-figure">
+    <!-- 显示每次运行总加载时间的图片，路径由Liquid模板生成 -->
+    <img id="total_load_time_per_run" src="{{ '/assets/images/total_load_time_per_run (Edited).png' | relative_url }}" alt="">
+    <figcaption>图3-3 总加载用时随运行次数变化趋势</figcaption>
+  </figure>
+  <figure class="image-figure">
+    <!-- 显示每次运行YOLO入侵检测加载时间的图片，路径由Liquid模板生成 -->
+    <img id="yolo_intrusion_load_time_per_run" src="{{ '/assets/images/yolo_intrusion_load_time_per_run (Edited).png' | relative_url }}" alt="">
+    <figcaption>图3-4 YOLO检测页与入侵统计页加载用时变化趋势</figcaption>
+  </figure>
 </div>
 
 
