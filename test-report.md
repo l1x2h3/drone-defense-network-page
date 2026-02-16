@@ -57,63 +57,6 @@ permalink: /test-report/
   @media (max-width: 900px) {
     .header-quick { display: none; }
   }
-
-</style>
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    var header = document.getElementById("main-header");
-    if (!header || header.querySelector(".header-quick")) return;
-
-    var quick = document.createElement("div");
-    quick.className = "header-quick";
-    quick.innerHTML =
-      '<span class="header-quick-item"><a href="{{ '/' | relative_url }}">Page 1: Overview</a></span>' +
-      '<span class="header-quick-item"><a href="{{ '/database/' | relative_url }}">Page 2: Database</a></span>' +
-      '<span class="header-quick-item"><a href="{{ '/test-report/' | relative_url }}">Page 3: Test Report</a></span>' +
-      '<span class="header-quick-item">Version: v1.0.0</span>' +
-      '<span class="header-quick-item">System: Stable (sample)</span>';
-
-    var aux = header.querySelector(".aux-nav");
-    if (aux) {
-      header.insertBefore(quick, aux);
-    } else {
-      header.appendChild(quick);
-    }
-  });
-</script>
-
-
-
-## Test Result Template
-
-<div class="test-card">
-  <h3>1. Test Overview</h3>
-  <p>Test Date: YYYY-MM-DD</p>
-  <p>Build Version: vX.Y.Z</p>
-  <p>Environment: hardware/software setup</p>
-</div>
-
-<div class="test-card">
-  <h3>2. Key Metrics</h3>
-  <table>
-    <thead>
-      <tr><th>Metric</th><th>Target</th><th>Measured</th><th>Status</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Recognition Accuracy</td><td>>= 95%</td><td>--</td><td>--</td></tr>
-      <tr><td>Response Latency</td><td><= 1.5s</td><td>--</td><td>--</td></tr>
-      <tr><td>System Availability</td><td>>= 99.9%</td><td>--</td><td>--</td></tr>
-    </tbody>
-  </table>
-</div>
-
-
-
-
-
-<style>
   .image-row {
     display: flex;
     justify-content: space-around;
@@ -163,16 +106,16 @@ permalink: /test-report/
     vertical-align: middle;
   }
   th {
-    background-color: #1e3a5f;   /* 深科技蓝 */
+    background-color: #1e3a5f;
     color: white;
     font-weight: bold;
     white-space: nowrap;
   }
   tr:nth-child(even) {
-    background-color: #e9f0f9;   /* 极浅蓝 */
+    background-color: #e9f0f9;
   }
   tr:hover {
-    background-color: #c7ddf5;   /* 中等蓝 */
+    background-color: #c7ddf5;
   }
   td:first-child {
     font-weight: 500;
@@ -180,20 +123,77 @@ permalink: /test-report/
     background-color: #f0f7ff;
   }
   .total-row {
-    background-color: #b8d1f0 !important;  /* 柔和蓝 */
+    background-color: #b8d1f0 !important;
     font-weight: bold;
   }
   .total-row td:first-child {
     background-color: #b8d1f0 !important;
   }
   .average-col {
-    background-color: #d4e4fc;   /* 浅蓝灰 */
+    background-color: #d4e4fc;
     font-weight: 500;
   }
 </style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var header = document.getElementById("main-header");
+    if (!header || header.querySelector(".header-quick")) return;
+
+    var quick = document.createElement("div");
+    quick.className = "header-quick";
+    quick.innerHTML =
+      '<span class="header-quick-item"><a href="{{ '/' | relative_url }}">Page 1: Overview</a></span>' +
+      '<span class="header-quick-item"><a href="{{ '/database/' | relative_url }}">Page 2: Database</a></span>' +
+      '<span class="header-quick-item"><a href="{{ '/test-report/' | relative_url }}">Page 3: Test Report</a></span>' +
+      '<span class="header-quick-item">Version: v1.0.0</span>' +
+      '<span class="header-quick-item">System: Stable (sample)</span>';
+
+    var aux = header.querySelector(".aux-nav");
+    if (aux) {
+      header.insertBefore(quick, aux);
+    } else {
+      header.appendChild(quick);
+    }
+  });
+</script>
+
+
+## 无人机防御系统测试报告
+<div class="test-card">
+  <h3>1. 测试概述</h3>
+  <p>&emsp;&emsp;我们基于已有的无人机防御软件系统开展了时间性能测试，记录了软件中各个页面（模块）的加载耗时，旨在提供系统性能的基准数据，并为进一步优化提供数据支撑。</p>
+</div>
+<div class="test-card">
+  <h3>2. 测试环境、测试方法与性能指标</h3>
+  <p>&emsp;&emsp;我们进行测试时的测试环境如表2-1所示，主要的性能指标要求如表2-2所示，测试方法为：使用添加了时间性能测试代码的main.py作为测试程序，通过代码中的时间记录功能精确测量每个页面的创建时间。连续运行程序10次，记录每次运行时各页面创建时间，并将其汇总到xlsx表格中。</p>
+  <div style="display: flex; align-items: flex-start; gap: 20px;">
+    <table>
+      <caption>表2-1 测试环境</caption>
+      <thead>
+        <tr><th>名称</th><th>内容</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>硬件环境</td><td>4GB内存，2核处理器</td></tr>
+        <tr><td>操作系统</td><td>Ubuntu 25.10 非LTS</td></tr>
+        <tr><td>软件环境</td><td>Python3.12.9, PyQt6, Pytest</td></tr>
+      </tbody>
+    </table>
+    <table>
+      <caption>表2-2 主要性能指标</caption>
+      <thead>
+        <tr><th>性能指标</th><th>目标</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>平均加载用时</td><td><=15s</td></tr>
+        <tr><td>最高加载用时</td><td><=30s</td></tr>
+        <tr><td>稳定加载用时</td><td><=10s</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 <div class="test-card">
   <h3>3. 测试结果与分析</h3>
-<p>&emsp;&emsp;通过进行测试，我们得到了如表3-1所示的表格。从表格中的测试数据可以看出，系统在第一次运行时加载时间最长，后续运行逐渐变短：首次运行总加载耗时26.69s，而到了第十次运行时总加载耗时8.61s，平均加载耗时11.62s。</p>
+  <p>&emsp;&emsp;通过进行测试，我们得到了如表3-1所示的表格。从表格中的测试数据可以看出，系统在第一次运行时加载时间最长，后续运行逐渐变短：首次运行总加载耗时26.69s，而到了第十次运行时总加载耗时8.61s，平均加载耗时11.62s。</p>
 <div class="fixed-caption">表3-1 连续十次运行各页面加载耗时</div>
 <table>
   <thead>
@@ -247,12 +247,20 @@ permalink: /test-report/
     <figcaption>图3-4 YOLO检测页与入侵统计页加载用时变化趋势</figcaption>
   </figure>
 </div>
-
-
-
-
+<p>&emsp;&emsp;因此，本系统最高耗时26.69s，小于指标要求的30s；平均耗时11.62s，小于指标要求的15s；稳定加载用时约为8-9s，小于指标要求的10s，如表3-2所示。</p>
+  <div class="fixed-caption">表3-2 性能指标要求与实际测量情况</div>
+  <table>
+    <thead>
+      <tr><th>性能指标</th><th>目标</th><th>测量结果</th><th>状态</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>平均加载用时</td><td><=15s</td><td>11.62s</td><td><strong>通过</strong></td></tr>
+      <tr><td>最高加载用时</td><td><=30s</td><td>26.69s</td><td><strong>通过</strong></td></tr>
+      <tr><td>稳定加载用时</td><td><=10s</td><td><=10s</td><td><strong>通过</strong></td></tr>
+    </tbody>
+  </table>
+</div>
 <div class="test-card">
-  <h3>4. Conclusion</h3>
-  <p>Pass / Fail</p>
-  <p>Open issues and priorities.</p>
+  <h3>4. 测试结论</h3>
+  <p>&emsp;&emsp;<strong>通过。</strong>本测试报告记录了无人机防御系统在特定环境下的页面加载性能。系统在首次运行时加载时间最长，后续运行中加载时间逐渐减少。测试结果表明，YOLO检测页是系统启动时的主要性能瓶颈，平均加载时间达5.65634秒，首次运行高达19.3653秒。后续针对YOLO检测页初次耗时长的现象，预计将引入动态加载机制，仅在需要时才开启YOLO检测，借此来达到改善性能瓶颈的目的。</p>
 </div>
