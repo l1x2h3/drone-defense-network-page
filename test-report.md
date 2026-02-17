@@ -6,6 +6,42 @@ permalink: /test-report/
 ---
 
 <style>
+/* 基础毛玻璃按钮样式 */
+.header-quick-item {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: .78rem;
+    color: #475569;
+    border: 1px solid rgba(148, 163, 184, .32);
+    background: rgba(226, 232, 240, .3);
+    border-radius: 999px;
+    padding: .22rem .58rem;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    /* 平滑过渡效果 */
+    transition: transform .22s ease,
+                box-shadow .22s ease,
+                border-color .22s ease,
+                background-color .22s ease;
+    transform-origin: center;
+    will-change: transform;
+}
+/* 悬停交互效果（仅支持悬停的设备） */
+@media (hover: hover) and (pointer: fine) {
+    .header-quick-item:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 14px 30px rgba(15, 23, 42, .14);
+        border-color: rgba(59, 130, 246, .35);
+    }
+}
+/* 针对减弱动效用户的降级处理 */
+@media (prefers-reduced-motion: reduce) {
+    .header-quick-item {
+        transition: none !important;
+        transform: none !important;
+    }
+}
   .product-nav {
     display: flex;
     flex-wrap: wrap;
@@ -29,7 +65,6 @@ permalink: /test-report/
     margin: .8rem 0;
     background: rgba(255,255,255,.72);
   }
-
   .header-quick {
     display: flex;
     align-items: center;
@@ -49,10 +84,6 @@ permalink: /test-report/
     background: rgba(226, 232, 240, .3);
     border-radius: 999px;
     padding: .22rem .58rem;
-  }
-  .header-quick-item a {
-    color: inherit;
-    text-decoration: none;
   }
   @media (max-width: 900px) {
     .header-quick { display: none; }
