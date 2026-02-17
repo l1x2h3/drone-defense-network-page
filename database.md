@@ -6,6 +6,69 @@ permalink: /database/
 ---
 
 <style>
+  :root {
+    --font-body: "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    --font-heading: "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  }
+  body {
+    background: #dbe3ee;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-image: url("{{ '/assets/images/background.jpg' | relative_url }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: saturate(1.08) contrast(1.03);
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: linear-gradient(180deg, rgba(241, 245, 249, .55), rgba(226, 232, 240, .45));
+  }
+  body, .main-content, .site-title, .site-nav, .search-input {
+    font-family: var(--font-body) !important;
+  }
+  .header-quick-item {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: .78rem;
+    color: #475569;
+    border: 1px solid rgba(148, 163, 184, .32);
+    background: rgba(226, 232, 240, .3);
+    border-radius: 999px;
+    padding: .22rem .58rem;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: transform .22s ease,
+                box-shadow .22s ease,
+                border-color .22s ease,
+                background-color .22s ease;
+    transform-origin: center;
+    will-change: transform;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .header-quick-item:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 14px 30px rgba(15, 23, 42, .14);
+        border-color: rgba(59, 130, 246, .35);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .header-quick-item {
+        transition: none !important;
+        transform: none !important;
+    }
+  }
   .product-nav {
     display: flex;
     flex-wrap: wrap;
@@ -77,14 +140,9 @@ permalink: /database/
     border-radius: 999px;
     padding: .22rem .58rem;
   }
-  .header-quick-item a {
-    color: inherit;
-    text-decoration: none;
-  }
   @media (max-width: 900px) {
     .header-quick { display: none; }
   }
-
 </style>
 
 

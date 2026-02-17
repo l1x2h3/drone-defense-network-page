@@ -6,8 +6,42 @@ permalink: /test-report/
 ---
 
 <style>
-/* 基础毛玻璃按钮样式 */
-.header-quick-item {
+  :root {
+    --font-body: "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    --font-heading: "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  }
+  body {
+    background: #dbe3ee;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background-image: url("{{ '/assets/images/background.jpg' | relative_url }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: saturate(1.08) contrast(1.03);
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: linear-gradient(180deg, rgba(241, 245, 249, .55), rgba(226, 232, 240, .45));
+  }
+  body,
+  .main-content,
+  .site-title,
+  .site-nav,
+  .search-input {
+    font-family: var(--font-body) !important;
+  }
+  .header-quick-item {
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
@@ -19,29 +53,26 @@ permalink: /test-report/
     padding: .22rem .58rem;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-    /* 平滑过渡效果 */
     transition: transform .22s ease,
                 box-shadow .22s ease,
                 border-color .22s ease,
                 background-color .22s ease;
     transform-origin: center;
     will-change: transform;
-}
-/* 悬停交互效果（仅支持悬停的设备） */
-@media (hover: hover) and (pointer: fine) {
+  }
+  @media (hover: hover) and (pointer: fine) {
     .header-quick-item:hover {
         transform: translateY(-3px) scale(1.02);
         box-shadow: 0 14px 30px rgba(15, 23, 42, .14);
         border-color: rgba(59, 130, 246, .35);
     }
-}
-/* 针对减弱动效用户的降级处理 */
-@media (prefers-reduced-motion: reduce) {
+  }
+  @media (prefers-reduced-motion: reduce) {
     .header-quick-item {
         transition: none !important;
         transform: none !important;
     }
-}
+  }
   .product-nav {
     display: flex;
     flex-wrap: wrap;
@@ -113,7 +144,7 @@ permalink: /test-report/
     font-weight: 500;
     line-height: 1.4;
   }
-  .fixed-caption {
+  caption, .fixed-caption {
     margin-top: 8px;
     font-size: 14px;
     color: #333;
@@ -124,44 +155,26 @@ permalink: /test-report/
   table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 40, 80, 0.2);
-    font-size: 14px;
-    border-radius: 8px;
-    overflow: hidden;
   }
   th, td {
-    border: 1px solid #b0c4de;
-    padding: 8px 6px;
-    text-align: center;
+    text-align: center !important;
     vertical-align: middle;
   }
-  th {
-    background-color: #1e3a5f;
-    color: white;
+  table tbody tr:nth-child(odd) > td {
+    background: rgba(239, 246, 255, .58) !important;
+  }
+  table tbody tr:nth-child(even) > td {
+    background: rgba(241, 245, 249, .72) !important;
+  }
+  table thead tr {
+    background: rgba(219, 234, 254, .86) !important;
+  }
+  .total-row td {
+    background: rgba(191, 219, 254, 0.9) !important;
     font-weight: bold;
-    white-space: nowrap;
-  }
-  tr:nth-child(even) {
-    background-color: #e9f0f9;
-  }
-  tr:hover {
-    background-color: #c7ddf5;
-  }
-  td:first-child {
-    font-weight: 500;
-    text-align: left;
-    background-color: #f0f7ff;
-  }
-  .total-row {
-    background-color: #b8d1f0 !important;
-    font-weight: bold;
-  }
-  .total-row td:first-child {
-    background-color: #b8d1f0 !important;
   }
   .average-col {
-    background-color: #d4e4fc;
+    background: rgba(219, 234, 254, 0.7) !important;
     font-weight: 500;
   }
 </style>
