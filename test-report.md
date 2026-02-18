@@ -41,6 +41,41 @@ permalink: /test-report/
   .search-input {
     font-family: var(--font-body) !important;
   }
+  .site-header,
+  .main-header {
+    background: rgba(241, 245, 249, .28) !important;
+    border-bottom: 1px solid rgba(148, 163, 184, .24) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
+  .site-header {
+    box-shadow: none !important;
+  }
+  .main-header .header-quick {
+    background: rgba(248, 250, 252, .36);
+    border: 1px solid rgba(148, 163, 184, .28);
+    border-radius: 12px;
+    padding: .35rem .6rem;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, .08);
+  }
+  .main-header .search,
+  .main-header .search-input-wrap {
+    background: rgba(248, 250, 252, .34) !important;
+    border: 1px solid rgba(148, 163, 184, .28) !important;
+    border-radius: 10px !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, .08);
+  }
+  .main-header .search-input,
+  .main-header .search-input:focus {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  .main-header .search-input::placeholder {
+    color: #64748b;
+  }
   .header-quick-item {
     display: inline-flex;
     align-items: center;
@@ -96,6 +131,46 @@ permalink: /test-report/
     margin: .8rem 0;
     background: rgba(255,255,255,.72);
   }
+  .test-card h3 {
+    margin-top: 0;
+    color: #0b3d91;
+    font-weight: 800;
+    border-left: 4px solid rgba(59, 130, 246, .55);
+    padding-left: .5rem;
+  }
+  .test-card p strong {
+    color: #b45309;
+  }
+  .key-highlight {
+    border: 1px solid rgba(96, 165, 250, .5);
+    border-radius: 10px;
+    background: rgba(219, 234, 254, .62);
+    padding: .7rem .8rem;
+    margin: .8rem 0 1rem;
+    line-height: 1.7;
+  }
+  .key-highlight strong {
+    color: #1d4ed8;
+    font-weight: 800;
+  }
+  @media (min-width: 50rem) {
+    .side-bar {
+      display: none !important;
+    }
+    .main {
+      margin-left: 0 !important;
+      max-width: none !important;
+    }
+    .main-header,
+    .main-content-wrap {
+      max-width: none !important;
+    }
+    .main-content {
+      max-width: 1080px !important;
+      margin: 0 auto !important;
+      padding: 1rem 1.5rem 2.4rem !important;
+    }
+  }
   .header-quick {
     display: flex;
     align-items: center;
@@ -124,6 +199,7 @@ permalink: /test-report/
     justify-content: space-around;
     align-items: center;
     margin-bottom: 20px;
+    gap: 1rem;
     width: 100%;
   }
   .image-row img {
@@ -131,11 +207,27 @@ permalink: /test-report/
     height: auto;
     object-fit: contain;
     width: 100%;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, .32);
+    box-shadow: 0 12px 26px rgba(15, 23, 42, .16);
+    transition: transform .28s ease, box-shadow .28s ease;
+    cursor: zoom-in;
   }
   .image-figure {
     margin: 0;
     text-align: center;
     width: 100%;
+    border: 1px solid rgba(148, 163, 184, .26);
+    border-radius: 14px;
+    background: rgba(248, 250, 252, .5);
+    padding: .65rem .65rem .5rem;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, .10);
+    animation: imgCardIn .45s ease both;
+  }
+  .image-figure:nth-child(2) {
+    animation-delay: .08s;
   }
   .image-figure figcaption {
     margin-top: 8px;
@@ -143,6 +235,73 @@ permalink: /test-report/
     color: #333;
     font-weight: 500;
     line-height: 1.4;
+  }
+  .image-figure:hover img {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 16px 30px rgba(15, 23, 42, .2);
+  }
+  @keyframes imgCardIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .img-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(2, 6, 23, .68);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .22s ease;
+  }
+  .img-lightbox.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .img-lightbox-content {
+    position: relative;
+    width: min(94vw, 1280px);
+    max-height: 90vh;
+    transform: scale(.96);
+    transition: transform .22s ease;
+  }
+  .img-lightbox.is-open .img-lightbox-content {
+    transform: scale(1);
+  }
+  .img-lightbox img {
+    display: block;
+    width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 14px;
+    border: 1px solid rgba(148, 163, 184, .28);
+    box-shadow: 0 20px 44px rgba(15, 23, 42, .45);
+    background: rgba(15, 23, 42, .2);
+  }
+  .img-lightbox-close {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 999px;
+    color: #0f172a;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    background: rgba(248, 250, 252, .95);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, .3);
   }
   caption, .fixed-caption {
     margin-top: 8px;
@@ -200,9 +359,67 @@ permalink: /test-report/
     }
   });
 </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var targets = document.querySelectorAll(".image-row img");
+    if (!targets.length) return;
+
+    var overlay = document.createElement("div");
+    overlay.className = "img-lightbox";
+    overlay.setAttribute("aria-hidden", "true");
+    overlay.innerHTML =
+      '<div class="img-lightbox-content">' +
+      '<button class="img-lightbox-close" type="button" aria-label="Close">&times;</button>' +
+      '<img alt="preview">' +
+      "</div>";
+
+    document.body.appendChild(overlay);
+
+    var preview = overlay.querySelector("img");
+    var closeBtn = overlay.querySelector(".img-lightbox-close");
+
+    function closeLightbox() {
+      overlay.classList.remove("is-open");
+      overlay.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    function openLightbox(src, alt) {
+      preview.src = src;
+      preview.alt = alt || "preview";
+      overlay.classList.add("is-open");
+      overlay.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    targets.forEach(function (img) {
+      img.addEventListener("click", function () {
+        openLightbox(img.currentSrc || img.src, img.alt);
+      });
+    });
+
+    overlay.addEventListener("click", function (ev) {
+      if (ev.target === overlay) closeLightbox();
+    });
+
+    closeBtn.addEventListener("click", closeLightbox);
+
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape" && overlay.classList.contains("is-open")) {
+        closeLightbox();
+      }
+    });
+  });
+</script>
 
 
 ## 无人机防御系统测试报告
+
+<div class="key-highlight">
+  <strong>报告用途：</strong>用于汇总各模块测试表现，快速识别瓶颈页面和关键风险点。<br>
+  <strong>重点指标：</strong>识别准确率、页面加载时间、稳定运行时延与连续运行一致性。<br>
+  <strong>建议关注：</strong>优先优化高耗时模块（如模型推理与统计页），并持续跟踪版本间性能回归。
+</div>
 <div class="test-card">
   <h3>1. 测试概述</h3>
   <p>&emsp;&emsp;我们基于已有的无人机防御软件系统开展了时间性能测试，记录了软件中各个页面（模块）的加载耗时，旨在提供系统性能的基准数据，并为进一步优化提供数据支撑。</p>

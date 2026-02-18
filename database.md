@@ -1,5 +1,5 @@
 ---
-title: Database
+title: 数据库
 layout: home
 nav_order: 2
 permalink: /database/
@@ -36,6 +36,41 @@ permalink: /database/
   }
   body, .main-content, .site-title, .site-nav, .search-input {
     font-family: var(--font-body) !important;
+  }
+  .site-header,
+  .main-header {
+    background: rgba(241, 245, 249, .28) !important;
+    border-bottom: 1px solid rgba(148, 163, 184, .24) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+  }
+  .site-header {
+    box-shadow: none !important;
+  }
+  .main-header .header-quick {
+    background: rgba(248, 250, 252, .36);
+    border: 1px solid rgba(148, 163, 184, .28);
+    border-radius: 12px;
+    padding: .35rem .6rem;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, .08);
+  }
+  .main-header .search,
+  .main-header .search-input-wrap {
+    background: rgba(248, 250, 252, .34) !important;
+    border: 1px solid rgba(148, 163, 184, .28) !important;
+    border-radius: 10px !important;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, .08);
+  }
+  .main-header .search-input,
+  .main-header .search-input:focus {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+  .main-header .search-input::placeholder {
+    color: #64748b;
   }
   .header-quick-item {
     display: inline-flex;
@@ -85,19 +120,41 @@ permalink: /database/
     font-weight: 600;
     font-size: .9rem;
   }
+  @media (min-width: 50rem) {
+    .side-bar {
+      display: none !important;
+    }
+    .main {
+      margin-left: 0 !important;
+      max-width: none !important;
+    }
+    .main-header,
+    .main-content-wrap {
+      max-width: none !important;
+    }
+    .main-content {
+      max-width: none !important;
+      width: auto !important;
+      margin: 0 auto !important;
+      padding: 1rem 1.5rem 2.2rem !important;
+    }
+  }
+
   .db-table-wrap {
-    overflow: auto;
-    max-height: 70vh;
+    overflow: visible;
+    width: 100%;
     border: 1px solid rgba(148,163,184,.35);
-    border-radius: 10px;
-    background: rgba(248,250,252,.68);
+    border-radius: 12px;
+    background: rgba(248,250,252,.72);
+    box-shadow: 0 10px 26px rgba(15, 23, 42, .08);
   }
   .db-table {
     width: 100%;
-    min-width: 2200px;
+    min-width: 0;
     border-collapse: collapse;
     table-layout: fixed;
-    font-size: .86rem;
+    font-size: .84rem;
+    line-height: 1.45;
   }
   .db-table th,
   .db-table td {
@@ -113,6 +170,27 @@ permalink: /database/
     top: 0;
     z-index: 1;
     background: #dbeafe;
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+  .db-table tbody tr:nth-child(odd) td {
+    background: rgba(241, 245, 249, .55);
+  }
+  .db-table tbody tr:hover td {
+    background: rgba(219, 234, 254, .45);
+  }
+  .db-table td:nth-child(4),
+  .db-table td:nth-child(5),
+  .db-table td:nth-child(6) {
+    white-space: normal;
+  }
+  .db-table th:nth-child(1),
+  .db-table th:nth-child(2),
+  .db-table th:nth-child(3),
+  .db-table td:nth-child(1),
+  .db-table td:nth-child(2),
+  .db-table td:nth-child(3) {
+    text-align: center;
   }
   .db-note {
     color: #475569;
@@ -171,17 +249,23 @@ permalink: /database/
 
 
 
-## Local Database Snapshot
+## 本地数据库快照
 
 <p class="db-note">Source: <code>drone_data.db</code> in repository root.</p>
 
-### Table: drone_data
+<div class="db-note" style="background: rgba(239, 246, 255, .72); border: 1px solid rgba(147, 197, 253, .45); border-radius: 10px; padding: .7rem .8rem; line-height: 1.7;">
+  <strong>数据概括：</strong>本表汇总了系统可识别与可防御的无人机型号，覆盖消费级、行业级与特种任务机型。<br>
+  <strong>类型范围：</strong>包含多旋翼航拍机、行业巡检机、安防侦察机以及长距通信机型，品牌覆盖 DJI、Autel、Yuneec、Hubsan、Skydio、Parrot 等。<br>
+  <strong>防御意义：</strong>通过频段、协议、通信距离、视频链路和载荷能力等信息，可快速完成目标分类、干扰策略匹配和处置优先级判断。
+</div>
 
-<p class="db-note">Rows: 10</p>
+### 数据表：drone_data
+
+<p class="db-note">记录数：10</p>
 <div class="db-table-wrap">
 <table class="db-table">
-<colgroup><col style="width:70px"><col style="width:170px"><col style="width:260px"><col style="width:420px"><col style="width:480px"><col style="width:520px"><col style="width:180px"><col style="width:260px"></colgroup>
-<thead><tr><th>id</th><th>name</th><th>communication_protocol</th><th>frequency_band</th><th>max_communication_distance</th><th>camera_resolution</th><th>video_bitrate</th><th>information_source</th></tr></thead>
+<colgroup><col style="width:5%"><col style="width:8%"><col style="width:12%"><col style="width:20%"><col style="width:22%"><col style="width:23%"><col style="width:5%"><col style="width:5%"></colgroup>
+<thead><tr><th>编号</th><th>型号</th><th>通信协议</th><th>频段</th><th>最大通信距离</th><th>相机分辨率</th><th>视频码率</th><th>信息来源</th></tr></thead>
 <tbody>
 <tr><td>1</td><td>DJI AIR 3S</td><td>O4、802.11 a/b/g/n/ac、蓝牙5.2</td><td>O4：2.4000 GHz 至 2.4835 GHz，5.170 GHz 至 5.250 GHz，5.725 GHz 至 5.850 GHz<br>802.11 a/b/g/n/ac：2.400 GHz 至 2.4835 GHz，5.725 GHz 至 5.850 GHz<br>蓝牙 5.2：2.400 GHz 至 2.4835 GHz</td><td>无干扰无遮挡：10 公里<br>强干扰：都市中心，约 1.5 至 4 公里<br>中干扰：近郊县城，约 4 至 10 公里<br>微干扰：远郊/海边，约 10 至 20 公里<br>微干扰有建筑物遮挡：约 0 公里至 0.5 公里<br>微干扰有树丛遮挡：约 0.5 公里至 3 公里</td><td>广角相机照片分辨率：8192×6144，5000万像素<br>广角相机视频分辨率：4K3840 × 2160/FHD1920 × 1080/竖拍 2.7K1512 × 2688<br>中长焦相机照片分辨率：8064×6048，4800万像素<br>中长焦相机视频分辨率：4K3840 × 2160/FHD1920 × 1080/竖拍 2.7K1512 × 2688</td><td>H.264/H.265 码率：130Mbps</td><td>https://www.dji.com/cn/air-3s/specs</td></tr>
 <tr><td>2</td><td>DJI Mavic 4 Pro</td><td>O4+、802.11a/b/g/n/ac/ax、蓝牙 5.1</td><td>O4+：2.4000 GHz 至 2.4835 GHz，5.1700 GHz 至 5.2500 GHz，5.7250 GHz 至 5.8500 GHz<br>802.11a/b/g/n/ac/ax：2.4000 GHz 至 2.4835 GHz，5.7250 GHz 至 5.850 GHz<br>蓝牙 5.1：2.4000 GHz 至 2.4835 GHz</td><td>无干扰无遮挡：15 公里<br>强干扰（都市中心）：约 1.5 至 6 公里<br>中干扰（城郊县城）：约 6 至 15 公里<br>微干扰（远郊/海边）：约 15 至 30 公里<br>微干扰，有建筑物遮挡：约 0 至 0.7 公里<br>微干扰，有树丛遮挡：约 0.7 至 4.5 公里</td><td>哈苏相机照片分辨率：12288 × 8192，1亿像素<br>哈苏相机视频分辨率：6K6016×3384/DCI 4K4096×2160/4K3840×2160/FHD1920×1080/4K 竖拍2160×3840<br>中长焦相机照片分辨率： 8064 × 6048，4800万像素<br>中长焦相机视频分辨率：4K3840×2160/FHD1920×1080/2.7K 竖拍1512×2688<br>长焦相机照片分辨率：8192 × 6144，5000万像素<br>长焦相机视频分辨率：4K3840×2160/FHD1920×1080/2.7K 竖拍1512×2688</td><td>H.264 标准码率：90Mbps<br>H.265 标准码率：180Mbps<br>H.264 ALL-I 码率：1200Mbps</td><td>https://www.dji.com/cn/mavic-4-pro/specs</td></tr>
