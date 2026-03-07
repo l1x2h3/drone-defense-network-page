@@ -279,3 +279,85 @@ permalink: /database/
 <tr><td>10</td><td>ANAFI-UKR</td><td>5G、Wi-Fi、MARS Radio、LoRa</td><td>暂无</td><td>5G：range without limits<br>Wi-Fi：5 km<br>MARS Radio：15 km<br>LoRa: 20 km</td><td>广角图片分辨率：21MP<br>直线型图片分辨率：16MP<br>视频分辨率：4K、FHD、HD</td><td>暂无</td><td>https://www.parrot.com/en/anafi-ukr-technical-specifications</td></tr>
 </tbody></table>
 </div>
+
+### 无人机防御系统侦测产品对比
+
+<p class="db-note">本表对比了主流无人机防御系统厂商的侦测类产品参数，包括侦测频段、距离、定位精度、多目标能力等关键指标。</p>
+<div class="db-table-wrap">
+<table class="db-table">
+<colgroup><col style="width:12%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:16%"><col style="width:16%"></colgroup>
+<thead><tr><th>对比项目</th><th>大公博创</th><th>海康威视</th><th>华御创新</th><th>历正科技</th><th>启垣防务</th><th>上海特金</th></tr></thead>
+<tbody>
+<tr><td>主要产品型号</td><td>DG-W1001/1002/1003/1004</td><td>D10RA/D02RP</td><td>A330/A340/A336/CHM-08</td><td>前哨系列/VAR系列/哨兵300</td><td>无</td><td>X1B/X1C/X1D Pro/H2L Pro</td></tr>
+<tr><td>侦测频段</td><td>20MHz-8GHz (全频段)</td><td>26MHz-6GHz / 2.4G/5.8G</td><td>700MHz-6.3GHz</td><td>30MHz-6GHz</td><td>300MHz-6GHz</td><td>70MHz-6GHz</td></tr>
+<tr><td>侦测距离</td><td>1-5km</td><td>1-10km (视环境)</td><td>1-7km</td><td>0-10km</td><td>5km</td><td>0.5-10km (视环境)</td></tr>
+<tr><td>定位精度</td><td>≤10m (TDOA)</td><td>≤5° (测向)</td><td>支持定位</td><td>≤10m (TDOA)</td><td>无</td><td>≤10m (TDOA)</td></tr>
+<tr><td>多目标能力</td><td>≥10架次</td><td>≤32架次</td><td>≥60架次</td><td>≥20架次</td><td>多目标</td><td>≥20架次</td></tr>
+<tr><td>识别机型数量</td><td>大疆/道通等主流/穿越机/改频机</td><td>支持多频段无人机</td><td>≥35种</td><td>全机型库(1000+种)</td><td>支持主流无人机</td><td>700-1000+种</td></tr>
+<tr><td>穿越机识别</td><td>支持</td><td>支持</td><td>A340专门支持FPV</td><td>支持</td><td>支持</td><td>支持</td></tr>
+<tr><td>测向功能</td><td>支持 (≤3°精度)</td><td>支持 (≤5°精度)</td><td>支持</td><td>支持 (≤3°精度)</td><td>无</td><td>支持 (3°-10°精度)</td></tr>
+<tr><td>防护等级</td><td>IP65</td><td>IP66/IP67</td><td>模块化设计</td><td>IP66</td><td>IP66</td><td>IP65/IP66</td></tr>
+<tr><td>工作温度</td><td>-30℃~55℃</td><td>-20℃~60℃</td><td>-40℃~70℃</td><td>-40℃~70℃</td><td>未标注</td><td>-40℃~65℃</td></tr>
+<tr><td>部署方式</td><td>固定式/手持式</td><td>固定式</td><td>模块化组件</td><td>固定式/移动式/手持式</td><td>固定式</td><td>固定式/手提式/手持式</td></tr>
+</tbody></table>
+</div>
+
+### 无人机防御系统反制产品对比
+
+<p class="db-note">本表对比了主流无人机防御系统厂商的反制类产品参数，包括反制频段、距离、方式、响应时间等关键指标。</p>
+<div class="db-table-wrap">
+<table class="db-table">
+<colgroup><col style="width:12%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:16%"><col style="width:16%"></colgroup>
+<thead><tr><th>对比项目</th><th>大公博创</th><th>海康威视</th><th>华御创新</th><th>历正科技</th><th>启垣防务</th><th>上海特金</th></tr></thead>
+<tbody>
+<tr><td>主要产品型号</td><td>DG-W2001/DG-W3001</td><td>五频段/六频段/D04JA</td><td>卫士三号/猎手三号</td><td>利剑P1/1000/3000</td><td>固定式/便携式干扰器</td><td>PX100/D2C-A2/H2D Pro</td></tr>
+<tr><td>反制频段</td><td>1.2GHz-5.8GHz(4-7频段)</td><td>433M-5.8G(5-6频段)</td><td>300MHz-6GHz(多频段)</td><td>图传/数传/遥控(多频段)</td><td>840M-5.8G(多频段)</td><td>900M-5.8G(多频段)</td></tr>
+<tr><td>反制距离</td><td>1-3km (围栏式)</td><td>干控比≤10:1</td><td>≥5km</td><td>0-3km</td><td>1.5-3km</td><td>0.5-2km</td></tr>
+<tr><td>反制方式</td><td>定向频谱压制</td><td>多频段干扰</td><td>定向干扰多种模式</td><td>无线电压制式干扰</td><td>全向/定向干扰</td><td>宽频反制/精准反制</td></tr>
+<tr><td>响应时间</td><td>≤4s</td><td>快速响应</td><td>≤5s</td><td>≤5s</td><td>快速响应</td><td>快速响应</td></tr>
+<tr><td>多目标能力</td><td>多目标</td><td>多目标</td><td>≥8个目标</td><td>≥10-20架次</td><td>多目标</td><td>多目标</td></tr>
+<tr><td>部署方式</td><td>固定式/车载</td><td>固定式/便携</td><td>固定式</td><td>固定式/便携/车载</td><td>固定式/便携</td><td>固定式/手持</td></tr>
+<tr><td>防护等级</td><td>IP65</td><td>IP65</td><td>未标注</td><td>IP66</td><td>IP66</td><td>IP65</td></tr>
+<tr><td>工作温度</td><td>-30℃~55℃</td><td>-20℃~55℃</td><td>-40℃~55℃</td><td>-40℃~65℃</td><td>未标注</td><td>-40℃~65℃</td></tr>
+<tr><td>特殊功能</td><td>围栏式防护/组网联动</td><td>功率可调/电池续航</td><td>多干扰模式/7×24h工作</td><td>精准干扰/综合防御</td><td>自动防御/快速高效</td><td>察打一体/黑白名单</td></tr>
+</tbody></table>
+</div>
+
+### 无人机防御系统诱骗产品对比
+
+<p class="db-note">本表对比了主流无人机防御系统厂商的诱骗类产品参数，包括诱骗频段、范围、功率、效果等关键指标。</p>
+<div class="db-table-wrap">
+<table class="db-table">
+<colgroup><col style="width:12%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:16%"><col style="width:16%"></colgroup>
+<thead><tr><th>对比项目</th><th>大公博创</th><th>海康威视</th><th>华御创新</th><th>历正科技</th><th>启垣防务</th><th>上海特金</th></tr></thead>
+<tbody>
+<tr><td>主要产品型号</td><td>DG-W2002</td><td>无</td><td>无</td><td>天盾系列/潜盾系列/神枪手系列</td><td>无</td><td>ND10</td></tr>
+<tr><td>诱骗频段</td><td>GPS/GLONASS</td><td>无</td><td>无</td><td>GPS-L1/GLONASS-L1(可扩展)</td><td>无</td><td>GPS L1/GLONASS L1</td></tr>
+<tr><td>诱骗范围</td><td>0.5-1km</td><td>无</td><td>无</td><td>0-1km</td><td>无</td><td>≤500m (全向)</td></tr>
+<tr><td>诱骗功率</td><td>10mW (可定制)</td><td>无</td><td>无</td><td>低功率</td><td>无</td><td>≤10mW (可调)</td></tr>
+<tr><td>响应时间</td><td>≤10s</td><td>无</td><td>无</td><td>≤5s</td><td>无</td><td>＜3s</td></tr>
+<tr><td>诱骗效果</td><td>迫降/航迹修正/禁飞管控</td><td>无</td><td>无</td><td>迫降/驱离(多模式)</td><td>无</td><td>定向驱离/拒止</td></tr>
+<tr><td>部署方式</td><td>固定式</td><td>无</td><td>无</td><td>固定式/移动式/手持式</td><td>无</td><td>固定式</td></tr>
+<tr><td>认证情况</td><td>无线电核准</td><td>无</td><td>无</td><td>国家无委核准</td><td>无</td><td>国家无委核准</td></tr>
+<tr><td>特点</td><td>多制式卫星/穿越机有效</td><td>无</td><td>无</td><td>侦诱一体/多模诱骗</td><td>无</td><td>辐射功率小/无附带伤害</td></tr>
+</tbody></table>
+</div>
+
+### 无人机防御系统综合能力对比
+
+<p class="db-note">本表从产品线完整性、穿越机应对能力、组网协同能力、技术先进性等多个维度对比了主流无人机防御系统厂商的综合实力。</p>
+<div class="db-table-wrap">
+<table class="db-table">
+<colgroup><col style="width:16%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:14%"><col style="width:14%"></colgroup>
+<thead><tr><th>评估维度</th><th>大公博创</th><th>海康威视</th><th>华御创新</th><th>历正科技</th><th>启垣防务</th><th>上海特金</th></tr></thead>
+<tbody>
+<tr><td>侦测产品线完整性</td><td>★★★★★(固定/手持/车载)</td><td>★★★☆☆(固定式为主)</td><td>★★★☆☆(模块化组件)</td><td>★★★★★(最全面)</td><td>★☆☆☆☆(无)</td><td>★★★★☆(多种形态)</td></tr>
+<tr><td>反制产品线完整性</td><td>★★★★☆</td><td>★★★★☆</td><td>★★★☆☆</td><td>★★★★★</td><td>★★★☆☆</td><td>★★★★☆</td></tr>
+<tr><td>诱骗产品能力</td><td>★★★★☆</td><td>★☆☆☆☆</td><td>★☆☆☆☆</td><td>★★★★★</td><td>★☆☆☆☆</td><td>★★★☆☆</td></tr>
+<tr><td>穿越机应对能力</td><td>★★★★☆</td><td>★★★☆☆</td><td>★★★★★(A340专针对)</td><td>★★★★★</td><td>★★★☆☆</td><td>★★★★☆</td></tr>
+<tr><td>组网协同能力</td><td>★★★★★(TDOA组网)</td><td>★★★★☆(平台管理)</td><td>★★★☆☆</td><td>★★★★★(多机组网)</td><td>★★☆☆☆</td><td>★★★★★(TDOA组网)</td></tr>
+<tr><td>产品定价范围</td><td>8.8万-30万</td><td>6.6万-19.3万</td><td>模块化定价</td><td>3万-50万</td><td>固定式定价</td><td>3万-50万</td></tr>
+<tr><td>适用场景丰富度</td><td>★★★★★</td><td>★★★☆☆</td><td>★★★☆☆</td><td>★★★★★</td><td>★★☆☆☆</td><td>★★★★★</td></tr>
+<tr><td>技术先进性</td><td>★★★★☆</td><td>★★★☆☆</td><td>★★★★☆</td><td>★★★★★</td><td>★★☆☆☆</td><td>★★★★☆</td></tr>
+</tbody></table>
+</div>
